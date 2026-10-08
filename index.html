@@ -1,1929 +1,1128 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Selamat Ulang Tahun bebe 💗</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Parisienne&display=swap"
-    rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-        scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
         margin: 0;
         min-height: 100vh;
-
-        background:
-            radial-gradient(
-                circle at top,
-                #fff8fb 0%,
-                #ffdce8 45%,
-                #ffc2d8 100%
-            );
-
+        background: radial-gradient(circle at top, #fff8fb 0%, #ffdce8 45%, #ffc2d8 100%);
         color: #5c2940;
-
         font-family: "Lora", Georgia, serif;
-
         overflow-x: hidden;
     }
 
+    /* ================= OPENING ================= */
+
     #opening {
         position: fixed;
-
         inset: 0;
-
         z-index: 9999;
-
-        background:
-            radial-gradient(
-                circle at center,
-                #9b315d 0%,
-                #7d2348 55%,
-                #5c1835 100%
-            );
-
+        background: radial-gradient(circle at center, #9b315d 0%, #7d2348 55%, #5c1835 100%);
         overflow: hidden;
-
         cursor: pointer;
     }
 
+    #opening { transition: opacity 1.3s cubic-bezier(.4, 0, .2, 1); }
 
-    #opening.selesai {
+    #opening.selesai { pointer-events: none; opacity: 0; }
+
+    .shockwave {
+        position: absolute;
+        left: 75%;
+        top: 50%;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 220, 232, .85);
+        box-shadow: 0 0 25px rgba(255, 220, 232, .5), inset 0 0 25px rgba(255, 220, 232, .35);
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
         pointer-events: none;
+        z-index: 15;
+    }
+
+    #opening.hit .shockwave {
+        animation: shock 1.1s cubic-bezier(.1, .7, .3, 1) forwards;
+    }
+
+    #opening.hit .shockwave.dua {
+        animation-delay: .18s;
+    }
+
+    @keyframes shock {
+        0%   { transform: translate(-50%, -50%) scale(0); opacity: .9; }
+        100% { transform: translate(-50%, -50%) scale(14); opacity: 0; }
     }
 
     .opening-heart {
         position: absolute;
-
         left: 75%;
-        top: 47%;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
         font-family: Arial, sans-serif;
-
         font-size: 155px;
-
+        line-height: 1;
         color: #ffdce8;
-
-        text-shadow:
-            0 5px 15px rgba(255, 255, 255, .15),
-            0 0 35px rgba(255, 255, 255, .2);
-
-        animation:
-            heartPulse 1.2s ease-in-out infinite;
-
+        text-shadow: 0 5px 15px rgba(255, 255, 255, .15), 0 0 35px rgba(255, 255, 255, .2);
+        animation: heartPulse 1.2s ease-in-out infinite;
         z-index: 20;
     }
 
-
     @keyframes heartPulse {
-
-        50% {
-            transform:
-                translate(-50%, -50%)
-                scale(1.08);
-        }
+        50% { transform: translate(-50%, -50%) scale(1.08); }
     }
 
-
     .opening-heart.kena {
-
         animation:
             heartImpact .4s ease-out forwards,
             heartToCenter .7s .4s ease-in-out forwards,
             heartZoom 1.5s 1.1s cubic-bezier(.65, 0, .15, 1) forwards;
     }
 
-
     @keyframes heartImpact {
-
-        0% {
-            transform:
-                translate(-50%, -50%)
-                scale(1);
-        }
-
-        30% {
-            transform:
-                translate(-50%, -50%)
-                scale(1.2)
-                rotate(-8deg);
-        }
-
-        60% {
-            transform:
-                translate(-50%, -50%)
-                scale(.9)
-                rotate(8deg);
-        }
-
-        100% {
-            transform:
-                translate(-50%, -50%)
-                scale(1.05)
-                rotate(0);
-        }
+        0%   { transform: translate(-50%, -50%) scale(1); }
+        30%  { transform: translate(-50%, -50%) scale(1.2) rotate(-8deg); }
+        60%  { transform: translate(-50%, -50%) scale(.9) rotate(8deg); }
+        100% { transform: translate(-50%, -50%) scale(1.05) rotate(0); }
     }
-
 
     @keyframes heartToCenter {
-
-        0% {
-            left: 75%;
-            top: 50%;
-
-            transform:
-                translate(-50%, -50%)
-                scale(1.05);
-        }
-
-        100% {
-            left: 50%;
-            top: 50%;
-
-            transform:
-                translate(-50%, -50%)
-                scale(1.05);
-        }
+        0%   { left: 75%; top: 50%; transform: translate(-50%, -50%) scale(1.05); }
+        100% { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.05); }
     }
 
-
     @keyframes heartZoom {
-
-        0% {
-            left: 50%;
-            top: 50%;
-
-            transform:
-                translate(-50%, -50%)
-                scale(1.05);
-        }
-
-        35% {
-            transform:
-                translate(-50%, -50%)
-                scale(8);
-        }
-
-        65% {
-            transform:
-                translate(-50%, -50%)
-                scale(35);
-        }
-
-        100% {
-            transform:
-                translate(-50%, -50%)
-                scale(100);
-        }
+        0%   { left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.05); }
+        35%  { transform: translate(-50%, -50%) scale(8); }
+        65%  { transform: translate(-50%, -50%) scale(35); }
+        100% { transform: translate(-50%, -50%) scale(100); }
     }
 
     .archer {
         position: absolute;
-
         left: 12%;
         top: 50%;
-
         width: 330px;
         height: 280px;
-
-        transform:
-            translateY(-50%);
-
-        transition:
-            opacity .7s ease,
-            transform .7s ease;
+        transform: translateY(-50%);
+        transition: opacity .7s ease, transform .7s ease;
     }
 
-
     #opening.fade-archer .archer {
-
         opacity: 0;
-
-        transform:
-            translateY(-50%)
-            translateX(-25px)
-            scale(.9);
+        transform: translateY(-50%) translateX(-25px) scale(.9);
     }
 
     .bow {
-
         position: absolute;
-
         left: 40px;
         top: 20px;
-
         width: 115px;
         height: 230px;
-
-        border:
-            16px solid #ffdce8;
-
+        border: 16px solid #ffdce8;
         border-left: 0;
-
-        border-radius:
-            0 50% 50% 0;
-
-        filter:
-            drop-shadow(
-                0 5px 8px rgba(0, 0, 0, .25)
-            );
+        border-radius: 0 50% 50% 0;
+        filter: drop-shadow(0 5px 8px rgba(0, 0, 0, .25));
     }
 
     .bow-string {
-
         position: absolute;
-
         left: 40px;
         top: 20px;
-
         width: 100px;
         height: 230px;
-
         z-index: 5;
-
         overflow: visible;
-
         pointer-events: none;
     }
 
-
     .bow-string svg {
-
         position: absolute;
-
         left: 0;
         top: 0;
-
         width: 100px;
         height: 230px;
-
         overflow: visible;
     }
 
-
     .bow-string path {
-
         fill: none;
-
         stroke: #ffdce8;
-
         stroke-width: 3;
-
         stroke-linecap: round;
-
-        filter:
-            drop-shadow(
-                0 2px 3px rgba(0, 0, 0, .2)
-            );
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .2));
     }
 
     .arrow {
-
         position: absolute;
-
         left: 40px;
         top: 117px;
-
         width: 315px;
         height: 20px;
-
         display: flex;
-
         align-items: center;
-
         z-index: 6;
-
-        transform:
-            translateX(0);
-
+        transform: translateX(0);
         opacity: 1;
     }
 
-
+    /* jarak terbang dihitung lewat JS (--jarak) supaya pas di semua layar */
     #opening.shoot .arrow {
-
-        animation:
-            shootArrow 1s cubic-bezier(.2, .8, .2, 1)
-            forwards;
+        animation: shootArrow 1s cubic-bezier(.2, .8, .2, 1) forwards;
     }
-
 
     @keyframes shootArrow {
-
-        0% {
-            transform:
-                translateX(-70px);
-
-            opacity: 1;
-        }
-
-        60% {
-            transform:
-                translateX(300px);
-
-            opacity: 1;
-        }
-
-        100% {
-            transform:
-                translateX(430px);
-
-            opacity: 1;
-        }
+        0%   { transform: translateX(-70px); opacity: 1; }
+        60%  { transform: translateX(calc(var(--jarak, 430px) * 0.7)); opacity: 1; }
+        100% { transform: translateX(var(--jarak, 430px)); opacity: 1; }
     }
-
 
     #opening.hit .arrow {
-
-        animation:
-            arrowFade .55s ease-out forwards;
+        animation: arrowFade .55s ease-out forwards;
     }
-
 
     @keyframes arrowFade {
-
-        0% {
-            transform:
-                translateX(430px);
-
-            opacity: 1;
-        }
-
-        100% {
-            transform:
-                translateX(450px);
-
-            opacity: 0;
-        }
+        0%   { transform: translateX(var(--jarak, 430px)); opacity: 1; }
+        100% { transform: translateX(calc(var(--jarak, 430px) + 20px)); opacity: 0; }
     }
-
 
     .arrow-shaft {
-
         display: block;
-
         width: 275px;
         height: 5px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #ffdce8,
-                #ff9fbe
-            );
-
+        background: linear-gradient(90deg, #ffdce8, #ff9fbe);
         border-radius: 10px;
-
-        box-shadow:
-            0 2px 4px rgba(0, 0, 0, .25);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
     }
 
-
     .arrow-head {
-
         position: absolute;
-
         right: 18px;
-
         font-family: Arial, sans-serif;
-
         font-size: 30px;
-
         line-height: 1;
-
         color: #ffdce8;
     }
 
-
     .arrow-heart {
-
         position: absolute;
-
         left: -20px;
         top: -7px;
-
         font-family: Arial, sans-serif;
-
         font-size: 25px;
-
         color: #ffdce8;
     }
 
     .opening-text {
-
         position: absolute;
-
         bottom: 10%;
         left: 50%;
-
-        transform:
-            translateX(-50%);
-
+        transform: translateX(-50%);
         width: 90%;
-
         text-align: center;
-
         font-size: 18px;
-
         letter-spacing: 1px;
-
         color: #ffdce8;
-
         line-height: 1.7;
-
         user-select: none;
-
         pointer-events: none;
-
-        transition:
-            opacity .5s ease;
+        transition: opacity .5s ease;
     }
 
+    .opening-text small { font-size: 13px; opacity: .7; }
 
-    .opening-text small {
+    #opening.selesai .opening-text { opacity: 0; }
 
-        font-size: 13px;
-
-        opacity: .7;
-    }
-
-
-    #opening.selesai .opening-text {
-
-        opacity: 0;
-    }
+    /* ================= MAIN ================= */
 
     #main {
-
         min-height: 100vh;
-
-        padding:
-            70px 20px 100px;
-
+        padding: 70px 20px 100px;
         opacity: 0;
-
-        transform:
-            scale(1.08);
-
-        transition:
-            opacity .9s ease,
-            transform 1.2s cubic-bezier(.2, .8, .2, 1);
+        transform: scale(1.1);
+        filter: blur(16px);
+        transition: opacity 1.3s ease, transform 1.6s cubic-bezier(.2, .8, .2, 1), filter 1.4s ease;
     }
-
 
     #main.muncul {
-
         opacity: 1;
-
-        transform:
-            scale(1);
+        transform: scale(1);
+        filter: blur(0);
     }
 
+    /* saat pindah ke surat */
+    #main.muncul.keluar {
+        opacity: 0;
+        transform: scale(.94);
+        filter: blur(10px);
+        pointer-events: none;
+        transition: opacity 1.2s ease .2s, transform 1.5s cubic-bezier(.4, 0, .2, 1), filter 1.2s ease;
+    }
 
     .container {
-
         width: min(850px, 100%);
-
         margin: auto;
-
         text-align: center;
     }
 
-
     h1 {
-
         margin: 0;
-
-        font-family:
-            "Parisienne",
-            cursive;
-
-        font-size:
-            clamp(48px, 9vw, 90px);
-
+        font-family: "Parisienne", cursive;
+        font-size: clamp(48px, 9vw, 90px);
         font-weight: 400;
-
         color: #a83262;
-
         line-height: 1.1;
+        opacity: 0;
     }
 
-
-    h1 span {
-
-        color: #e74f89;
-    }
-
+    h1 span { color: #e74f89; }
 
     .subtitle {
-
         margin-top: 18px;
-
         font-size: 17px;
-
         letter-spacing: 2px;
-
         color: #8e4260;
+        opacity: 0;
     }
+
+    #main.muncul h1       { animation: fadeUp .9s .3s ease-out forwards; }
+    #main.muncul .subtitle { animation: fadeUp .9s .6s ease-out forwards; }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ================= KUE ================= */
 
     .cake-area {
-
         margin-top: 60px;
-
         display: flex;
-
         justify-content: center;
-
         position: relative;
     }
 
-
     .cake {
-
         position: relative;
-
         width: 190px;
         height: 150px;
     }
 
+    /* bayangan di bawah kue */
+    .cake-shadow {
+        position: absolute;
+        left: 5px;
+        top: 138px;
+        width: 180px;
+        height: 14px;
+        background: radial-gradient(ellipse, rgba(120, 30, 70, .28), transparent 70%);
+        opacity: 0;
+    }
 
     .cake-top {
-
         position: absolute;
-
         left: 10px;
         top: 55px;
-
         width: 170px;
         height: 55px;
-
-        background:
-            linear-gradient(
-                #ff9fbe,
-                #f875a3
-            );
-
-        border-radius:
-            18px 18px 10px 10px;
-
-        box-shadow:
-            0 8px 20px rgba(145, 35, 80, .18);
+        background: linear-gradient(#ff9fbe, #f875a3);
+        border-radius: 18px 18px 10px 10px;
+        box-shadow: 0 8px 20px rgba(145, 35, 80, .18);
     }
-
 
     .cake-bottom {
-
         position: absolute;
-
         left: 20px;
         top: 100px;
-
         width: 150px;
         height: 35px;
-
         background: #e95f91;
-
-        border-radius:
-            0 0 14px 14px;
+        border-radius: 0 0 14px 14px;
     }
 
-
     .cream {
-
         position: absolute;
-
         left: 10px;
         top: 45px;
-
         width: 170px;
         height: 25px;
-
         background: #fff8fb;
-
         border-radius: 50%;
     }
 
-
     .candle {
-
         position: absolute;
-
         top: 5px;
-
         width: 14px;
         height: 45px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #fff,
-                #ff91b5
-            );
-
+        background: linear-gradient(90deg, #fff, #ff91b5);
         border-radius: 4px;
     }
 
-
-    .candle.one {
-        left: 48px;
-    }
-
-
-    .candle.two {
-        left: 88px;
-    }
-
-
-    .candle.three {
-        left: 128px;
-    }
-
+    .candle.one   { left: 48px; }
+    .candle.two   { left: 88px; }
+    .candle.three { left: 128px; }
 
     .flame {
-
         position: absolute;
-
         top: -18px;
         left: 2px;
-
         width: 10px;
         height: 16px;
-
         background: #ffb347;
-
         border-radius: 50%;
-
-        box-shadow:
-            0 0 12px rgba(255, 170, 60, .7);
-
-        animation:
-            flame .8s ease-in-out infinite alternate;
+        box-shadow: 0 0 12px rgba(255, 170, 60, .7);
+        opacity: 0;
+        transform: scale(0);
     }
 
+    /* semua bagian kue tersembunyi dulu, lalu jatuh dari atas */
+    .cake-bottom, .cake-top, .cream, .candle {
+        opacity: 0;
+        transform-origin: 50% 100%;
+    }
+
+    #main.muncul .cake-bottom {
+        animation: jatuh .9s 1.1s ease forwards;
+    }
+
+    #main.muncul .cake-top {
+        animation: jatuh .9s 1.8s ease forwards;
+    }
+
+    #main.muncul .cream {
+        animation: jatuh .8s 2.5s ease forwards;
+    }
+
+    #main.muncul .cake-shadow {
+        animation: shadowIn 1s 1.1s ease-out forwards;
+    }
+
+    /* lilin jatuh satu per satu */
+    #main.muncul .candle.one {
+        animation: jatuhLilin .8s 3.2s ease forwards;
+    }
+    #main.muncul .candle.two {
+        animation: jatuhLilin .8s 3.5s ease forwards;
+    }
+    #main.muncul .candle.three {
+        animation: jatuhLilin .8s 3.8s ease forwards;
+    }
+
+    /* api menyala setelah lilin mendarat */
+    #main.muncul .candle.one .flame {
+        animation: apiNyala .5s 4.1s ease-out forwards, flame .8s 4.6s ease-in-out infinite alternate;
+    }
+    #main.muncul .candle.two .flame {
+        animation: apiNyala .5s 4.4s ease-out forwards, flame .8s 4.9s ease-in-out infinite alternate;
+    }
+    #main.muncul .candle.three .flame {
+        animation: apiNyala .5s 4.7s ease-out forwards, flame .8s 5.2s ease-in-out infinite alternate;
+    }
+
+    /* jatuh -> mendarat gepeng -> memantul -> diam */
+    @keyframes jatuh {
+        0% {
+            opacity: 0;
+            transform: translateY(-420px) rotate(-6deg);
+            animation-timing-function: cubic-bezier(.5, 0, .9, .55);
+        }
+        12% { opacity: 1; }
+        58% {
+            opacity: 1;
+            transform: translateY(0) rotate(0) scale(1.06, .9);
+            animation-timing-function: cubic-bezier(.2, .8, .3, 1);
+        }
+        78% {
+            transform: translateY(-9px) scale(.99, 1.03);
+            animation-timing-function: ease-in-out;
+        }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes jatuhLilin {
+        0% {
+            opacity: 0;
+            transform: translateY(-380px) rotate(14deg);
+            animation-timing-function: cubic-bezier(.5, 0, .9, .55);
+        }
+        12% { opacity: 1; }
+        58% {
+            opacity: 1;
+            transform: translateY(0) rotate(0) scale(1.1, .88);
+            animation-timing-function: cubic-bezier(.2, .8, .3, 1);
+        }
+        78% {
+            transform: translateY(-7px) scale(.97, 1.05);
+            animation-timing-function: ease-in-out;
+        }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes shadowIn {
+        to { opacity: 1; }
+    }
+
+    @keyframes apiNyala {
+        0%   { opacity: 0; transform: scale(0); }
+        60%  { opacity: 1; transform: scale(1.4); }
+        100% { opacity: 1; transform: scale(1); }
+    }
 
     @keyframes flame {
+        to { transform: scale(.8) translateY(2px); }
+    }
 
-        to {
+    /* ================= TOMBOL ================= */
 
-            transform:
-                scale(.8)
-                translateY(2px);
+    .btn {
+        margin-top: 30px;
+        padding: 14px 25px;
+        border: none;
+        border-radius: 30px;
+        background: #e85d91;
+        color: white;
+        font-family: inherit;
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(194, 50, 100, .2);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .2s ease, box-shadow .2s ease, opacity .8s ease;
+    }
+
+    .btn.siap {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .btn.siap:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(194, 50, 100, .25);
+    }
+
+    /* ================= PARTIKEL, ASAP, API PADAM ================= */
+
+    .partikel {
+        position: fixed;
+        z-index: 10000;
+        pointer-events: none;
+        font-family: Arial, sans-serif;
+        line-height: 1;
+        transform: translate(-50%, -50%);
+        animation: semburan var(--dur, 1.3s) cubic-bezier(.1, .7, .3, 1) forwards;
+    }
+
+    @keyframes semburan {
+        0%   { opacity: 1; transform: translate(-50%, -50%) scale(.3) rotate(0deg); }
+        65%  { opacity: 1; }
+        100% {
+            opacity: 0;
+            transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(var(--rot));
         }
     }
 
-    .btn {
-
-        margin-top: 30px;
-
-        padding:
-            14px 25px;
-
-        border: none;
-
-        border-radius: 30px;
-
-        background: #e85d91;
-
-        color: white;
-
-        font-family: inherit;
-
-        font-size: 15px;
-
-        cursor: pointer;
-
-        box-shadow:
-            0 8px 20px rgba(194, 50, 100, .2);
-
-        transition:
-            transform .2s ease,
-            box-shadow .2s ease;
+    .flame.padam {
+        animation: padam .35s ease-in forwards !important;
     }
 
-
-    .btn:hover {
-
-        transform:
-            translateY(-3px);
-
-        box-shadow:
-            0 12px 25px rgba(194, 50, 100, .25);
+    @keyframes padam {
+        0%   { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(.2) translateY(-8px); }
     }
+
+    .smoke {
+        position: absolute;
+        left: 3px;
+        top: -14px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, .75);
+        filter: blur(3px);
+        opacity: 0;
+        pointer-events: none;
+        animation: asap 1.5s ease-out forwards;
+    }
+
+    @keyframes asap {
+        0%   { opacity: .85; transform: translate(0, 0) scale(.6); }
+        100% { opacity: 0;   transform: translate(10px, -70px) scale(3.2); }
+    }
+
+    /* ================= SURAT ================= */
 
     #suratSlide {
-
         position: fixed;
-
         inset: 0;
-
         z-index: 500;
-
-        padding:
-            50px 20px;
-
+        padding: 50px 20px;
         overflow-y: auto;
-
-        background:
-            radial-gradient(
-                circle at top,
-                #fff8fb 0%,
-                #ffdce8 50%,
-                #ffc2d8 100%
-            );
-
-        opacity: 0;
-
+        background: radial-gradient(circle at top, #fff8fb 0%, #ffdce8 50%, #ffc2d8 100%);
         visibility: hidden;
-
-        transform:
-            translateY(100%);
-
-        transition:
-            opacity .8s ease,
-            transform .8s ease,
-            visibility .8s ease;
+        clip-path: circle(0% at var(--cx, 50%) var(--cy, 60%));
+        transition: clip-path 1.6s cubic-bezier(.65, 0, .2, 1), visibility 0s linear 1.6s;
     }
-
 
     #suratSlide.muncul {
-
-        opacity: 1;
-
         visibility: visible;
-
-        transform:
-            translateY(0);
+        clip-path: circle(150% at var(--cx, 50%) var(--cy, 60%));
+        transition: clip-path 1.6s cubic-bezier(.65, 0, .2, 1), visibility 0s;
     }
-
 
     .letter {
-
         width: min(700px, 100%);
-
-        margin:
-            20px auto 60px;
-
+        margin: 20px auto 60px;
         padding: 35px;
-
-        background:
-            rgba(255, 255, 255, .75);
-
-        border:
-            1px solid rgba(190, 70, 110, .15);
-
+        background: rgba(255, 255, 255, .75);
+        border: 1px solid rgba(190, 70, 110, .15);
         border-radius: 25px;
-
-        box-shadow:
-            0 15px 40px rgba(130, 30, 70, .1);
-
+        box-shadow: 0 15px 40px rgba(130, 30, 70, .1);
         text-align: left;
-
-        transform:
-            translateY(30px);
-
+        transform: translateY(40px) scale(.95);
         opacity: 0;
-
-        transition:
-            opacity 1s ease .5s,
-            transform 1s ease .5s;
+        filter: blur(8px);
+        transition: opacity 1.2s ease .9s, transform 1.4s cubic-bezier(.2, .8, .2, 1) .9s, filter 1.2s ease .9s;
     }
-
 
     #suratSlide.muncul .letter {
-
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0) scale(1);
+        filter: blur(0);
     }
 
-
     .letter-title {
-
         text-align: center;
-
-        font-family:
-            "Parisienne",
-            cursive;
-
+        font-family: "Parisienne", cursive;
         font-size: 45px;
-
         color: #b23867;
-
         margin-bottom: 25px;
     }
 
-
     #surat p {
-
-        margin:
-            0 0 18px;
-
+        margin: 0 0 18px;
         line-height: 1.8;
-
         font-size: 15px;
-
         color: #63354a;
-
         opacity: 0;
-
-        transform:
-            translateY(15px);
-
-        transition:
-            opacity .7s ease,
-            transform .7s ease;
+        transform: translateY(20px);
+        filter: blur(6px);
+        transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .2, 1), filter 1s ease;
     }
-
 
     #surat p.tampil {
-
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
+        filter: blur(0);
     }
-
 
     .pengirim {
-
         margin-top: 30px;
-
         text-align: right;
-
-        font-family:
-            "Parisienne",
-            cursive;
-
+        font-family: "Parisienne", cursive;
         font-size: 28px;
-
         color: #b23867;
-
         opacity: 0;
-
-        transition:
-            opacity 1s ease;
+        transition: opacity 1s ease;
     }
 
+    .pengirim.tampil { opacity: 1; }
 
-    .pengirim.tampil {
-
-        opacity: 1;
-    }
+    /* ================= MUSIK & HATI ================= */
 
     #tombolMusik {
-
         position: fixed;
-
         right: 20px;
         bottom: 20px;
-
         width: 50px;
         height: 50px;
-
         border: none;
-
         border-radius: 50%;
-
         background: #e85d91;
-
         color: white;
-
         font-size: 20px;
-
         cursor: pointer;
-
         z-index: 1000;
-
-        box-shadow:
-            0 8px 20px rgba(150, 30, 80, .2);
+        box-shadow: 0 8px 20px rgba(150, 30, 80, .2);
     }
 
-
-    #tombolMusik.aktif {
-
-        animation:
-            musicPulse 1s infinite alternate;
-    }
-
+    #tombolMusik.aktif { animation: musicPulse 1s infinite alternate; }
 
     @keyframes musicPulse {
-
-        to {
-
-            transform:
-                scale(1.08);
-        }
+        to { transform: scale(1.08); }
     }
 
     .heart {
-
         position: fixed;
-
         bottom: -30px;
-
         color: #f06c9c;
-
         font-size: 20px;
-
         pointer-events: none;
-
-        animation:
-            naik 6s linear forwards;
-
+        animation: naik 6s linear forwards;
         z-index: 10;
     }
 
-
     @keyframes naik {
-
-        from {
-
-            transform:
-                translateY(0)
-                rotate(0deg);
-
-            opacity: 0;
-        }
-
-        15% {
-
-            opacity: .8;
-        }
-
-        to {
-
-            transform:
-                translateY(-110vh)
-                rotate(360deg);
-
-            opacity: 0;
-        }
+        from { transform: translateY(0) rotate(0deg); opacity: 0; }
+        15%  { opacity: .8; }
+        to   { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
-    @media(max-width: 700px) {
+    @media (max-width: 700px) {
+        .opening-heart { left: 78%; font-size: 105px; }
 
-        .opening-heart {
+        .shockwave { left: 78%; }
 
-            left: 78%;
-
-            font-size: 105px;
-        }
-
-
-        .archer {
-
-            left: 0;
-
-            transform:
-                translateY(-50%)
-                scale(.72);
-        }
-
+        .archer { left: 0; transform: translateY(-50%) scale(.72); }
 
         #opening.fade-archer .archer {
-
-            transform:
-                translateY(-50%)
-                translateX(-25px)
-                scale(.65);
+            transform: translateY(-50%) translateX(-25px) scale(.65);
         }
 
+        .opening-text { bottom: 8%; font-size: 15px; }
 
-        .opening-text {
+        .letter { padding: 25px 20px; }
 
-            bottom: 8%;
-
-            font-size: 15px;
-        }
-
-
-        .letter {
-
-            padding:
-                25px 20px;
-        }
-
-
-        h1 {
-
-            font-size: 55px;
-        }
-
+        h1 { font-size: 55px; }
     }
-
 </style>
 </head>
 <body>
 
 <div id="opening">
 
-
     <!-- LOVE -->
+    <div class="opening-heart" id="openingHeart">♥</div>
 
-    <div
-        class="opening-heart"
-        id="openingHeart"
-    >
-        ♥
-    </div>
-
+    <!-- GELOMBANG SAAT KENA -->
+    <div class="shockwave"></div>
+    <div class="shockwave dua"></div>
 
     <!-- BUSUR -->
-
     <div class="archer">
-
 
         <div class="bow"></div>
 
-
         <!-- TALI -->
-
         <div class="bow-string">
-
-            <svg
-                viewBox="0 0 100 230"
-                preserveAspectRatio="none"
-            >
-
-                <path
-                    id="stringPath"
-                    d="M0 0 Q0 115 0 230"
-                ></path>
-
+            <svg viewBox="0 0 100 230" preserveAspectRatio="none">
+                <path id="stringPath" d="M0 0 Q0 115 0 230"></path>
             </svg>
-
         </div>
-
 
         <!-- PANAH -->
-
-        <div
-            class="arrow"
-            id="arrow"
-        >
-
+        <div class="arrow" id="arrow">
             <span class="arrow-shaft"></span>
-
-            <span class="arrow-head">
-                ➤
-            </span>
-
-            <span class="arrow-heart">
-                ♥
-            </span>
-
+            <span class="arrow-head">➤</span>
+            <span class="arrow-heart">♥</span>
         </div>
 
-
     </div>
-
 
     <!-- TEKS -->
-
     <p class="opening-text">
-
         HAII SAYANGGG TOLONG DI KLIK YAA 💗
-
         <br>
-
-        <small>
-            KLIK WOII!!!
-        </small>
-
+        <small>KLIK WOII!!!</small>
     </p>
 
-
 </div>
+
 <main id="main">
-
-
     <div class="container">
 
-
         <h1>
-
             Selamat Ulang Tahun,
-
             <br>
-
             <span id="nama"></span>
-
         </h1>
 
-
-        <div
-            class="subtitle"
-            id="subtitle"
-        ></div>
-
+        <div class="subtitle" id="subtitle"></div>
 
         <div class="cake-area">
-
-
             <div class="cake">
 
+                <div class="cake-shadow"></div>
 
-                <div class="candle one">
-
-                    <div class="flame"></div>
-
-                </div>
-
-
-                <div class="candle two">
-
-                    <div class="flame"></div>
-
-                </div>
-
-
-                <div class="candle three">
-
-                    <div class="flame"></div>
-
-                </div>
-
+                <div class="candle one"><div class="flame"></div></div>
+                <div class="candle two"><div class="flame"></div></div>
+                <div class="candle three"><div class="flame"></div></div>
 
                 <div class="cream"></div>
-
-
                 <div class="cake-top"></div>
-
-
                 <div class="cake-bottom"></div>
 
-
             </div>
-
-
         </div>
 
-
-        <button
-            class="btn"
-            id="tiup"
-        >
-            Tiup lilinnya dong sayangg 🕯️
-        </button>
-
+        <button class="btn" id="tiup">Tiup lilinnya dong sayangg 🕯️</button>
 
     </div>
-
-
 </main>
 
-
-
-
 <section id="suratSlide">
-
-
     <div class="letter">
-
-
-        <div class="letter-title">
-            UNTUK BEBEHH
-        </div>
-
-
+        <div class="letter-title">UNTUK BEBEHH</div>
         <div id="surat"></div>
-
-
-        <div
-            class="pengirim"
-            id="pengirim"
-        ></div>
-
-
+        <div class="pengirim" id="pengirim"></div>
     </div>
-
-
 </section>
-<audio
-    id="lagu"
-    src="something about you.mp3"
-    loop
-    preload="auto"
-></audio>
 
+<audio id="lagu" src="something about you.mp3" loop preload="auto"></audio>
 
-<button id="tombolMusik">
-    🎵
-</button>
-
+<button id="tombolMusik">🎵</button>
 
 <script>
-
-    const NAMA =
-        "BEBE";
-
-
-    const SUBTITLE =
-        "HEPIBESDEYY BEBEE💗";
-
+    const NAMA = "BEBE";
+    const SUBTITLE = "HEPIBESDEYY BEBEE💗";
 
     const SURAT = [
-
         "Sayanggg, selamat ulang tahunn bebehh panjang umurr, sehat selaluu, ngambeknya di kuranginn.",
-
         "Akuu sayang banget sama kamuu, aku harap kamu jugaa gituu.",
-
-        "Makasihh yaa sayangg udahh mau sama akuu, aku merasa jadi orang yang paling beruntungg bisa dapat pacar kayak kamuu.",
-
-        "Semogaa kitaa sama sama terus yaa selamanyaa jangan asingg.",
-
+        "Makasihh yaa sayangg udahh mau sama akuu, aku merasa jadi orang yang paling berutungg bisa dapat pacar kayak akmuu.",
+        "Semogaa kitaa sama sama terus yaa sellamanyaa jangan putuss putuss.",
         "Maaf yaa cuman bisa ngasih kayak ginii aku mau ngirim kado tapi kamu gamau ngirim alamat kamu :(.",
-
         "DAH AKU GA PANDAI NULIS SURAT PANJANG PANJANG AOKWOAKOWKOAKW INTINYAA.",
-
         "Selamat ulang tahun, sayangg. I LOVEE YOUU. 💗"
-
     ];
 
+    const PENGIRIM = "MASA DEPAN KAMU 💗";
 
-    const PENGIRIM =
-        "MASA DEPAN KAMU 💗";
+    const opening      = document.getElementById("opening");
+    const main         = document.getElementById("main");
+    const suratSlide   = document.getElementById("suratSlide");
+    const openingHeart = document.getElementById("openingHeart");
+    const tombolTiup   = document.getElementById("tiup");
+    const suratElement = document.getElementById("surat");
+    const pengirim     = document.getElementById("pengirim");
+    const stringPath   = document.getElementById("stringPath");
+    const arrow        = document.getElementById("arrow");
 
-    const opening =
-        document.getElementById("opening");
+    document.getElementById("nama").textContent = NAMA;
+    document.getElementById("subtitle").textContent = SUBTITLE;
+    pengirim.textContent = PENGIRIM;
 
-    const main =
-        document.getElementById("main");
-
-    const suratSlide =
-        document.getElementById("suratSlide");
-
-    const openingHeart =
-        document.getElementById("openingHeart");
-
-    const tombolTiup =
-        document.getElementById("tiup");
-
-    const suratElement =
-        document.getElementById("surat");
-
-    const pengirim =
-        document.getElementById("pengirim");
-
-    const stringPath =
-        document.getElementById("stringPath");
-
-    const arrow =
-        document.getElementById("arrow");
-
-    document.getElementById("nama")
-        .textContent = NAMA;
-
-    document.getElementById("subtitle")
-        .textContent = SUBTITLE;
-
-    pengirim.textContent =
-        PENGIRIM;
+    /* ================= SUARA ================= */
 
     function suaraPanah() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
 
-        const audioCtx =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(700, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + .35);
 
-        const oscillator =
-            audioCtx.createOscillator();
-
-        const gain =
-            audioCtx.createGain();
-
-        oscillator.type =
-            "sine";
-
-        oscillator.frequency.setValueAtTime(
-            700,
-            audioCtx.currentTime
-        );
-
-        oscillator.frequency.exponentialRampToValueAtTime(
-            180,
-            audioCtx.currentTime + .35
-        );
-
-        gain.gain.setValueAtTime(
-            .12,
-            audioCtx.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            audioCtx.currentTime + .35
-        );
+        gain.gain.setValueAtTime(.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + .35);
 
         oscillator.connect(gain);
-
-        gain.connect(
-            audioCtx.destination
-        );
-
+        gain.connect(audioCtx.destination);
         oscillator.start();
-
-        oscillator.stop(
-            audioCtx.currentTime + .35
-        );
+        oscillator.stop(audioCtx.currentTime + .35);
     }
 
     function suaraKena() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
 
-        const audioCtx =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + .25);
 
-
-        const oscillator =
-            audioCtx.createOscillator();
-
-
-        const gain =
-            audioCtx.createGain();
-
-
-        oscillator.type =
-            "sine";
-
-
-        oscillator.frequency.setValueAtTime(
-            500,
-            audioCtx.currentTime
-        );
-
-
-        oscillator.frequency.exponentialRampToValueAtTime(
-            900,
-            audioCtx.currentTime + .25
-        );
-
-
-        gain.gain.setValueAtTime(
-            .15,
-            audioCtx.currentTime
-        );
-
-
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            audioCtx.currentTime + .4
-        );
-
+        gain.gain.setValueAtTime(.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + .4);
 
         oscillator.connect(gain);
-
-
-        gain.connect(
-            audioCtx.destination
-        );
-
-
+        gain.connect(audioCtx.destination);
         oscillator.start();
-
-
-        oscillator.stop(
-            audioCtx.currentTime + .4
-        );
+        oscillator.stop(audioCtx.currentTime + .4);
     }
 
+    /* ================= TALI & PANAH ================= */
+
     function taliTarik() {
-
-        const start =
-            performance.now();
-
-
-        const duration =
-            650;
-
+        const start = performance.now();
+        const duration = 650;
 
         function animasi(waktu) {
+            const progress = Math.min((waktu - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
 
-            const progress =
-                Math.min(
-                    (waktu - start) / duration,
-                    1
-                );
+            /* 0 = lurus, -65 = tertarik ke belakang */
+            const tengah = -65 * eased;
 
+            stringPath.setAttribute("d", `M0 0 Q${tengah} 115 0 230`);
 
-            const eased =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
+            /* panah ikut tertarik ke belakang */
+            arrow.style.transform = `translateX(${-65 * eased}px)`;
 
-
-            /*
-                0 = lurus
-                -65 = tertarik ke belakang
-            */
-
-            const tengah =
-                -65 * eased;
-
-
-            stringPath.setAttribute(
-                "d",
-                `M0 0 Q${tengah} 115 0 230`
-            );
-
-
-            /*
-                Panah ikut tertarik
-                ke belakang.
-            */
-
-            const mundur =
-                -65 * eased;
-
-
-            arrow.style.transform =
-                `translateX(${mundur}px)`;
-
-
-            if (progress < 1) {
-
-                requestAnimationFrame(
-                    animasi
-                );
-
-            }
-
+            if (progress < 1) requestAnimationFrame(animasi);
         }
 
-
-        requestAnimationFrame(
-            animasi
-        );
+        requestAnimationFrame(animasi);
     }
 
     function taliLepas() {
-
-        const start =
-            performance.now();
-
-
-        const duration =
-            300;
-
+        const start = performance.now();
+        const duration = 300;
 
         function animasi(waktu) {
+            const progress = Math.min((waktu - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
 
-            const progress =
-                Math.min(
-                    (waktu - start) / duration,
-                    1
-                );
+            const tengah = -65 + (65 * eased);
 
-
-            const eased =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            const tengah =
-                -65 +
-                (65 * eased);
-
-
-            stringPath.setAttribute(
-                "d",
-                `M0 0 Q${tengah} 115 0 230`
-            );
-
+            stringPath.setAttribute("d", `M0 0 Q${tengah} 115 0 230`);
 
             if (progress < 1) {
-
-                requestAnimationFrame(
-                    animasi
-                );
-
+                requestAnimationFrame(animasi);
             } else {
-
-                stringPath.setAttribute(
-                    "d",
-                    "M0 0 Q0 115 0 230"
-                );
-
+                stringPath.setAttribute("d", "M0 0 Q0 115 0 230");
             }
-
         }
 
-
-        requestAnimationFrame(
-            animasi
-        );
+        requestAnimationFrame(animasi);
     }
 
-    opening.addEventListener(
-        "click",
-        function() {
+    /* hitung jarak panah ke love supaya pas di semua ukuran layar */
+    function hitungJarakPanah() {
+        const arrowRect = arrow.getBoundingClientRect();
+        const heartRect = openingHeart.getBoundingClientRect();
 
+        /* skala (mode HP: busur di-scale) */
+        const skala = arrow.offsetWidth ? arrowRect.width / arrow.offsetWidth : 1;
 
-            if (
-                opening.classList.contains("shoot") ||
-                opening.classList.contains("hit") ||
-                opening.classList.contains("selesai")
-            ) {
+        const ujungPanah = arrowRect.right - (18 * skala);
+        const targetX = heartRect.left + heartRect.width * 0.4;
 
-                return;
+        /* translateX bekerja di ruang lokal (sebelum scale), jadi dibagi skala */
+        const jarak = (targetX - ujungPanah) / skala;
 
-            }
+        arrow.style.setProperty("--jarak", jarak + "px");
+    }
 
+    /* ================= PARTIKEL ================= */
 
-            /*
-                TALI + PANAH
-                SAMA-SAMA DITARIK KE BELAKANG.
-            */
+    function semburHati(x, y, jumlah, jarakMin, jarakMax, gravitasi, warna) {
+        const palet = warna
+            ? [warna]
+            : ["#ff9fbe", "#f06c9c", "#e85d91", "#ffdce8", "#ffb347", "#fff8fb"];
 
-            taliTarik();
+        for (let i = 0; i < jumlah; i++) {
+            const p = document.createElement("div");
+            const sudut = Math.random() * Math.PI * 2;
+            const jarak = jarakMin + Math.random() * (jarakMax - jarakMin);
 
+            p.className = "partikel";
+            p.textContent = Math.random() < .75 ? "♥" : "✦";
+            p.style.left = x + "px";
+            p.style.top = y + "px";
+            p.style.color = palet[Math.floor(Math.random() * palet.length)];
+            p.style.fontSize = 12 + Math.random() * 18 + "px";
+            p.style.setProperty("--dx", Math.cos(sudut) * jarak + "px");
+            p.style.setProperty("--dy", Math.sin(sudut) * jarak + gravitasi + "px");
+            p.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+            p.style.setProperty("--dur", (1 + Math.random() * .8) + "s");
 
-            /*
-                Setelah ditarik,
-                panah dilepaskan.
-            */
+            document.body.appendChild(p);
 
-            setTimeout(
-                function() {
-
-                    opening.classList.add(
-                        "shoot"
-                    );
-
-
-                    taliLepas();
-
-
-                    suaraPanah();
-
-                },
-                800
-            );
-
-
-            /*
-                PANAH KENA LOVE.
-            */
-
-            setTimeout(
-                function() {
-
-                    opening.classList.add(
-                        "hit"
-                    );
-
-
-                    openingHeart.classList.add(
-                        "kena"
-                    );
-
-
-                    suaraKena();
-
-
-                    /*
-                        Busur mulai memudar
-                        saat love bergerak ke tengah.
-                    */
-
-                    setTimeout(
-                        function() {
-
-                            opening.classList.add(
-                                "fade-archer"
-                            );
-
-                        },
-                        350
-                    );
-
-
-                },
-                1800
-            );
-
-
-            /*
-                MASUK HALAMAN UTAMA.
-            */
-
-            setTimeout(
-                function() {
-
-                    opening.classList.add(
-                        "selesai"
-                    );
-
-
-                    main.classList.add(
-                        "muncul"
-                    );
-
-
-                    mulaiMusik();
-
-
-                    setTimeout(
-                        function() {
-
-                            opening.remove();
-
-                        },
-                        1000
-                    );
-
-
-                },
-                3800
-            );
-
+            setTimeout(function () { p.remove(); }, 2000);
         }
-    );
+    }
 
-    const lagu =
-        document.getElementById("lagu");
+    /* ================= KLIK OPENING ================= */
 
+    opening.addEventListener("click", function () {
 
-    const tombolMusik =
-        document.getElementById("tombolMusik");
+        if (
+            opening.classList.contains("shoot") ||
+            opening.classList.contains("hit") ||
+            opening.classList.contains("selesai")
+        ) {
+            return;
+        }
 
+        /* hitung jarak sebelum panah ditarik */
+        hitungJarakPanah();
+
+        /* tali + panah ditarik ke belakang */
+        taliTarik();
+
+        /* setelah ditarik, panah dilepaskan */
+        setTimeout(function () {
+            opening.classList.add("shoot");
+            taliLepas();
+            suaraPanah();
+        }, 800);
+
+        /* panah kena love */
+        setTimeout(function () {
+            opening.classList.add("hit");
+            openingHeart.classList.add("kena");
+            suaraKena();
+
+            /* ledakan hati kecil saat panah kena */
+            const hr = openingHeart.getBoundingClientRect();
+            semburHati(hr.left + hr.width / 2, hr.top + hr.height / 2, 22, 90, 280, 0, "#ffdce8");
+
+            setTimeout(function () {
+                opening.classList.add("fade-archer");
+            }, 350);
+        }, 1800);
+
+        /* masuk halaman utama */
+        setTimeout(function () {
+            opening.classList.add("selesai");
+            main.classList.add("muncul");
+            mulaiMusik();
+
+            /* tombol tiup aktif setelah animasi kue selesai */
+            setTimeout(function () {
+                tombolTiup.classList.add("siap");
+            }, 5800);
+
+            setTimeout(function () {
+                opening.remove();
+            }, 1600);
+        }, 3800);
+    });
+
+    /* ================= MUSIK ================= */
+
+    const lagu = document.getElementById("lagu");
+    const tombolMusik = document.getElementById("tombolMusik");
 
     function mulaiMusik() {
+        tombolMusik.classList.add("aktif");
+        lagu.volume = 0;
 
-        tombolMusik.classList.add(
-            "aktif"
-        );
-
-
-        lagu.volume =
-            0;
-
-
-        const p =
-            lagu.play();
-
+        const p = lagu.play();
 
         if (p && p.then) {
+            p.then(function () {
+                let volume = 0;
+                const target = .8;
+                const langkah = target / 30;
 
-            p.then(
-                function() {
+                const fade = setInterval(function () {
+                    volume += langkah;
 
-                    let volume = 0;
+                    if (volume >= target) {
+                        volume = target;
+                        clearInterval(fade);
+                    }
 
-                    const target =
-                        .8;
-
-                    const langkah =
-                        target / 30;
-
-
-                    const fade =
-                        setInterval(
-                            function() {
-
-                                volume +=
-                                    langkah;
-
-
-                                if (
-                                    volume >= target
-                                ) {
-
-                                    volume =
-                                        target;
-
-
-                                    clearInterval(
-                                        fade
-                                    );
-
-                                }
-
-
-                                lagu.volume =
-                                    volume;
-
-
-                            },
-                            100
-                        );
-
-                }
-            ).catch(
-                function() {}
-            );
-
+                    lagu.volume = volume;
+                }, 100);
+            }).catch(function () {});
         }
     }
 
-
-    tombolMusik.addEventListener(
-        "click",
-        function() {
-
-            if (lagu.paused) {
-
-                lagu.play();
-
-                tombolMusik.classList.add(
-                    "aktif"
-                );
-
-            } else {
-
-                lagu.pause();
-
-                tombolMusik.classList.remove(
-                    "aktif"
-                );
-
-            }
-
+    tombolMusik.addEventListener("click", function () {
+        if (lagu.paused) {
+            lagu.play();
+            tombolMusik.classList.add("aktif");
+        } else {
+            lagu.pause();
+            tombolMusik.classList.remove("aktif");
         }
-    );
+    });
+
+    /* ================= SURAT ================= */
 
     function tampilkanSurat() {
+        suratElement.innerHTML = "";
 
-        suratElement.innerHTML =
-            "";
+        SURAT.forEach(function (text, index) {
+            const p = document.createElement("p");
+            p.textContent = text;
+            suratElement.appendChild(p);
 
+            setTimeout(function () {
+                p.classList.add("tampil");
+            }, 1700 + index * 1000);
+        });
 
-        SURAT.forEach(
-            function(text, index) {
-
-
-                const p =
-                    document.createElement(
-                        "p"
-                    );
-
-
-                p.textContent =
-                    text;
-
-
-                suratElement.appendChild(
-                    p
-                );
-
-
-                setTimeout(
-                    function() {
-
-                        p.classList.add(
-                            "tampil"
-                        );
-
-                    },
-                    800 +
-                    index * 900
-                );
-
-            }
-        );
-
-
-        setTimeout(
-            function() {
-
-                pengirim.classList.add(
-                    "tampil"
-                );
-
-            },
-            800 +
-            SURAT.length * 900
-        );
-
+        setTimeout(function () {
+            pengirim.classList.add("tampil");
+        }, 1700 + SURAT.length * 1000);
     }
 
-    tombolTiup.addEventListener(
-        "click",
-        function() {
+    /* ================= TIUP LILIN ================= */
 
+    tombolTiup.addEventListener("click", function () {
 
-            document
-                .querySelectorAll(".flame")
-                .forEach(
-                    function(flame) {
+        tombolTiup.textContent = "Good girl💗💗";
+        tombolTiup.disabled = true;
 
-                        flame.style.display =
-                            "none";
+        /* api padam satu per satu + asap */
+        document.querySelectorAll(".flame").forEach(function (flame, i) {
+            setTimeout(function () {
+                flame.classList.add("padam");
 
-                    }
-                );
+                const asap = document.createElement("div");
+                asap.className = "smoke";
+                flame.parentElement.appendChild(asap);
 
+                setTimeout(function () { asap.remove(); }, 1600);
+            }, i * 180);
+        });
 
-            tombolTiup.textContent =
-                "Good girl💗💗";
+        /* titik pusat kue = pusat reveal surat */
+        const cakeRect = document.querySelector(".cake").getBoundingClientRect();
+        const cx = cakeRect.left + cakeRect.width / 2;
+        const cy = cakeRect.top + cakeRect.height / 2;
 
+        /* hati meledak dari kue */
+        setTimeout(function () {
+            semburHati(cx, cy - 40, 36, 100, 320, 140);
+        }, 600);
 
-            tombolTiup.disabled =
-                true;
+        /* halaman surat membuka dari kue seperti lingkaran */
+        setTimeout(function () {
+            suratSlide.style.setProperty("--cx", cx + "px");
+            suratSlide.style.setProperty("--cy", cy + "px");
 
+            main.classList.add("keluar");
+            suratSlide.classList.add("muncul");
 
-            setTimeout(
-                function() {
+            tampilkanSurat();
+        }, 1600);
+    });
 
-                    suratSlide.classList.add(
-                        "muncul"
-                    );
-
-
-                    tampilkanSurat();
-
-                },
-                900
-            );
-
-        }
-    );
+    /* ================= HATI NAIK ================= */
 
     function buatHeart() {
+        const heart = document.createElement("div");
 
-        const heart =
-            document.createElement(
-                "div"
-            );
+        heart.className = "heart";
+        heart.textContent = "♥";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = 14 + Math.random() * 18 + "px";
+        heart.style.animationDuration = 4 + Math.random() * 4 + "s";
 
+        document.body.appendChild(heart);
 
-        heart.className =
-            "heart";
-
-
-        heart.textContent =
-            "♥";
-
-
-        heart.style.left =
-            Math.random() * 100 +
-            "vw";
-
-
-        heart.style.fontSize =
-            14 +
-            Math.random() * 18 +
-            "px";
-
-
-        heart.style.animationDuration =
-            4 +
-            Math.random() * 4 +
-            "s";
-
-
-        document.body.appendChild(
-            heart
-        );
-
-
-        setTimeout(
-            function() {
-
-                heart.remove();
-
-            },
-            8000
-        );
-
+        setTimeout(function () {
+            heart.remove();
+        }, 8000);
     }
 
-
-    setInterval(
-        buatHeart,
-        1200
-    );
-
+    setInterval(buatHeart, 1200);
 </script>
 </body>
 </html>
