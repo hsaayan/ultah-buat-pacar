@@ -43,11 +43,6 @@
         overflow-x: hidden;
     }
 
-
-    /* =========================================================
-       OPENING
-    ========================================================= */
-
     #opening {
         position: fixed;
 
@@ -72,11 +67,6 @@
     #opening.selesai {
         pointer-events: none;
     }
-
-
-    /* =========================================================
-       LOVE
-    ========================================================= */
 
     .opening-heart {
         position: absolute;
@@ -207,11 +197,6 @@
         }
     }
 
-
-    /* =========================================================
-       PEMANAH
-    ========================================================= */
-
     .archer {
         position: absolute;
 
@@ -240,11 +225,6 @@
             scale(.9);
     }
 
-
-    /* =========================================================
-       BUSUR U TERBUKA KE KIRI
-    ========================================================= */
-
     .bow {
 
         position: absolute;
@@ -268,29 +248,6 @@
                 0 5px 8px rgba(0, 0, 0, .25)
             );
     }
-
-
-    /* =========================================================
-       TALI BUSUR
-       
-       Kedua ujung tetap berada di ujung busur.
-
-       Saat ditarik:
-       
-              ujung
-                |
-                |
-                |
-               (
-              (
-               (
-                |
-                |
-              ujung
-
-       Bagian tengah bergerak KE KIRI,
-       bukan ke kanan.
-    ========================================================= */
 
     .bow-string {
 
@@ -339,11 +296,6 @@
                 0 2px 3px rgba(0, 0, 0, .2)
             );
     }
-
-
-    /* =========================================================
-       PANAH
-    ========================================================= */
 
     .arrow {
 
@@ -477,11 +429,6 @@
         color: #ffdce8;
     }
 
-
-    /* =========================================================
-       TEKS OPENING
-    ========================================================= */
-
     .opening-text {
 
         position: absolute;
@@ -525,11 +472,6 @@
 
         opacity: 0;
     }
-
-
-    /* =========================================================
-       MAIN PAGE
-    ========================================================= */
 
     #main {
 
@@ -603,11 +545,6 @@
 
         color: #8e4260;
     }
-
-
-    /* =========================================================
-       CAKE
-    ========================================================= */
 
     .cake-area {
 
@@ -754,11 +691,6 @@
         }
     }
 
-
-    /* =========================================================
-       BUTTON
-    ========================================================= */
-
     .btn {
 
         margin-top: 30px;
@@ -797,11 +729,6 @@
         box-shadow:
             0 12px 25px rgba(194, 50, 100, .25);
     }
-
-
-    /* =========================================================
-       SURAT
-    ========================================================= */
 
     #suratSlide {
 
@@ -964,11 +891,6 @@
         opacity: 1;
     }
 
-
-    /* =========================================================
-       MUSIC
-    ========================================================= */
-
     #tombolMusik {
 
         position: fixed;
@@ -1014,11 +936,6 @@
         }
     }
 
-
-    /* =========================================================
-       FLOATING HEARTS
-    ========================================================= */
-
     .heart {
 
         position: fixed;
@@ -1063,11 +980,6 @@
             opacity: 0;
         }
     }
-
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
 
     @media(max-width: 700px) {
 
@@ -1123,9 +1035,6 @@
 </style>
 </head>
 <body>
-<!-- =========================================================
-     OPENING
-========================================================= -->
 
 <div id="opening">
 
@@ -1206,12 +1115,6 @@
 
 
 </div>
-
-
-<!-- =========================================================
-     MAIN PAGE
-========================================================= -->
-
 <main id="main">
 
 
@@ -1281,7 +1184,7 @@
             class="btn"
             id="tiup"
         >
-            Tiup lilinya dong sayangg 🕯️
+            Tiup lilinnya dong sayangg 🕯️
         </button>
 
 
@@ -1291,9 +1194,7 @@
 </main>
 
 
-<!-- =========================================================
-     SURAT
-========================================================= -->
+
 
 <section id="suratSlide">
 
@@ -1319,12 +1220,6 @@
 
 
 </section>
-
-
-<!-- =========================================================
-     MUSIC
-========================================================= -->
-
 <audio
     id="lagu"
     src="something about you.mp3"
@@ -1339,10 +1234,6 @@
 
 
 <script>
-
-    /* =========================================================
-       DATA
-    ========================================================= */
 
     const NAMA =
         "BEBE";
@@ -1374,62 +1265,41 @@
     const PENGIRIM =
         "MASA DEPAN KAMU 💗";
 
-
-    /* =========================================================
-       ELEMENT
-    ========================================================= */
-
     const opening =
         document.getElementById("opening");
-
 
     const main =
         document.getElementById("main");
 
-
     const suratSlide =
         document.getElementById("suratSlide");
-
 
     const openingHeart =
         document.getElementById("openingHeart");
 
-
     const tombolTiup =
         document.getElementById("tiup");
-
 
     const suratElement =
         document.getElementById("surat");
 
-
     const pengirim =
         document.getElementById("pengirim");
-
 
     const stringPath =
         document.getElementById("stringPath");
 
-
     const arrow =
         document.getElementById("arrow");
-
 
     document.getElementById("nama")
         .textContent = NAMA;
 
-
     document.getElementById("subtitle")
         .textContent = SUBTITLE;
 
-
     pengirim.textContent =
         PENGIRIM;
-
-
-    /* =========================================================
-       SUARA PANAH
-    ========================================================= */
 
     function suaraPanah() {
 
@@ -1439,63 +1309,47 @@
                 window.webkitAudioContext
             )();
 
-
         const oscillator =
             audioCtx.createOscillator();
-
 
         const gain =
             audioCtx.createGain();
 
-
         oscillator.type =
             "sine";
-
 
         oscillator.frequency.setValueAtTime(
             700,
             audioCtx.currentTime
         );
 
-
         oscillator.frequency.exponentialRampToValueAtTime(
             180,
             audioCtx.currentTime + .35
         );
-
 
         gain.gain.setValueAtTime(
             .12,
             audioCtx.currentTime
         );
 
-
         gain.gain.exponentialRampToValueAtTime(
             .001,
             audioCtx.currentTime + .35
         );
 
-
         oscillator.connect(gain);
-
 
         gain.connect(
             audioCtx.destination
         );
 
-
         oscillator.start();
-
 
         oscillator.stop(
             audioCtx.currentTime + .35
         );
     }
-
-
-    /* =========================================================
-       SUARA LOVE
-    ========================================================= */
 
     function suaraKena() {
 
@@ -1557,16 +1411,6 @@
             audioCtx.currentTime + .4
         );
     }
-
-
-    /* =========================================================
-       TALI DITARIK KE BELAKANG
-       
-       Karena busur terbuka ke kiri,
-       bagian tengah tali ditarik ke kiri.
-
-       Ujung atas dan bawah TIDAK BERGERAK.
-    ========================================================= */
 
     function taliTarik() {
 
@@ -1639,11 +1483,6 @@
         );
     }
 
-
-    /* =========================================================
-       TALI DILEPAS
-    ========================================================= */
-
     function taliLepas() {
 
         const start =
@@ -1704,11 +1543,6 @@
             animasi
         );
     }
-
-
-    /* =========================================================
-       OPENING
-    ========================================================= */
 
     opening.addEventListener(
         "click",
@@ -1836,11 +1670,6 @@
         }
     );
 
-
-    /* =========================================================
-       MUSIK
-    ========================================================= */
-
     const lagu =
         document.getElementById("lagu");
 
@@ -1943,11 +1772,6 @@
         }
     );
 
-
-    /* =========================================================
-       SURAT
-    ========================================================= */
-
     function tampilkanSurat() {
 
         suratElement.innerHTML =
@@ -2003,11 +1827,6 @@
 
     }
 
-
-    /* =========================================================
-       TIUP LILIN
-    ========================================================= */
-
     tombolTiup.addEventListener(
         "click",
         function() {
@@ -2049,11 +1868,6 @@
 
         }
     );
-
-
-    /* =========================================================
-       FLOATING HEARTS
-    ========================================================= */
 
     function buatHeart() {
 
