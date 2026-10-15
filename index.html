@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Parisienne&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
     * { box-sizing: border-box; }
@@ -35,6 +35,14 @@
     }
 
     #opening { transition: opacity 1.3s cubic-bezier(.4, 0, .2, 1); }
+
+    /* TARIK BUSUR: tahan & geser */
+    #opening {
+        touch-action: none;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+    }
 
     #opening.selesai { pointer-events: none; opacity: 0; }
 
@@ -178,13 +186,12 @@
         opacity: 1;
     }
 
-    /* jarak terbang dihitung lewat JS (--jarak) supaya pas di semua layar */
     #opening.shoot .arrow {
         animation: shootArrow 1s cubic-bezier(.2, .8, .2, 1) forwards;
     }
 
     @keyframes shootArrow {
-        0%   { transform: translateX(-70px); opacity: 1; }
+        0%   { transform: translateX(var(--tarik, -70px)); opacity: 1; }
         60%  { transform: translateX(calc(var(--jarak, 430px) * 0.7)); opacity: 1; }
         100% { transform: translateX(var(--jarak, 430px)); opacity: 1; }
     }
@@ -243,6 +250,23 @@
 
     .opening-text small { font-size: 13px; opacity: .7; }
 
+    .opening-note {
+        display: block;
+        margin-top: 14px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #fff;
+        opacity: .95;
+        text-shadow: 0 0 16px rgba(255, 190, 215, .7);
+        animation: notePulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes notePulse {
+        from { transform: scale(1); opacity: .8; }
+        to   { transform: scale(1.05); opacity: 1; }
+    }
+
     #opening.selesai .opening-text { opacity: 0; }
 
     /* ================= MAIN ================= */
@@ -262,7 +286,6 @@
         filter: blur(0);
     }
 
-    /* saat pindah ke surat */
     #main.muncul.keluar {
         opacity: 0;
         transform: scale(.94);
@@ -297,7 +320,7 @@
         opacity: 0;
     }
 
-    #main.muncul h1       { animation: fadeUp .9s .3s ease-out forwards; }
+    #main.muncul h1 { animation: fadeUp .9s .3s ease-out forwards; }
     #main.muncul .subtitle { animation: fadeUp .9s .6s ease-out forwards; }
 
     @keyframes fadeUp {
@@ -320,7 +343,6 @@
         height: 150px;
     }
 
-    /* bayangan di bawah kue */
     .cake-shadow {
         position: absolute;
         left: 5px;
@@ -371,8 +393,8 @@
         border-radius: 4px;
     }
 
-    .candle.one   { left: 48px; }
-    .candle.two   { left: 88px; }
+    .candle.one { left: 48px; }
+    .candle.two { left: 88px; }
     .candle.three { left: 128px; }
 
     .flame {
@@ -388,51 +410,51 @@
         transform: scale(0);
     }
 
-    /* semua bagian kue tersembunyi dulu, lalu jatuh dari atas */
     .cake-bottom, .cake-top, .cream, .candle {
         opacity: 0;
         transform-origin: 50% 100%;
     }
 
     #main.muncul .cake-bottom {
-        animation: jatuh .9s 1.1s ease forwards;
+        animation: jatuh .7s .5s ease forwards;
     }
 
     #main.muncul .cake-top {
-        animation: jatuh .9s 1.8s ease forwards;
+        animation: jatuh .7s 1.05s ease forwards;
     }
 
     #main.muncul .cream {
-        animation: jatuh .8s 2.5s ease forwards;
+        animation: jatuh .65s 1.6s ease forwards;
     }
 
     #main.muncul .cake-shadow {
-        animation: shadowIn 1s 1.1s ease-out forwards;
+        animation: shadowIn .8s .5s ease-out forwards;
     }
 
-    /* lilin jatuh satu per satu */
     #main.muncul .candle.one {
-        animation: jatuhLilin .8s 3.2s ease forwards;
+        animation: jatuhLilin .6s 2.05s ease forwards;
     }
+
     #main.muncul .candle.two {
-        animation: jatuhLilin .8s 3.5s ease forwards;
+        animation: jatuhLilin .6s 2.3s ease forwards;
     }
+
     #main.muncul .candle.three {
-        animation: jatuhLilin .8s 3.8s ease forwards;
+        animation: jatuhLilin .6s 2.55s ease forwards;
     }
 
-    /* api menyala setelah lilin mendarat */
     #main.muncul .candle.one .flame {
-        animation: apiNyala .5s 4.1s ease-out forwards, flame .8s 4.6s ease-in-out infinite alternate;
-    }
-    #main.muncul .candle.two .flame {
-        animation: apiNyala .5s 4.4s ease-out forwards, flame .8s 4.9s ease-in-out infinite alternate;
-    }
-    #main.muncul .candle.three .flame {
-        animation: apiNyala .5s 4.7s ease-out forwards, flame .8s 5.2s ease-in-out infinite alternate;
+        animation: apiNyala .4s 2.7s ease-out forwards, flame .8s 3.1s ease-in-out infinite alternate;
     }
 
-    /* jatuh -> mendarat gepeng -> memantul -> diam */
+    #main.muncul .candle.two .flame {
+        animation: apiNyala .4s 2.95s ease-out forwards, flame .8s 3.35s ease-in-out infinite alternate;
+    }
+
+    #main.muncul .candle.three .flame {
+        animation: apiNyala .4s 3.2s ease-out forwards, flame .8s 3.6s ease-in-out infinite alternate;
+    }
+
     @keyframes jatuh {
         0% {
             opacity: 0;
@@ -513,7 +535,7 @@
         box-shadow: 0 12px 25px rgba(194, 50, 100, .25);
     }
 
-    /* ================= PARTIKEL, ASAP, API PADAM ================= */
+    /* ================= PARTIKEL ================= */
 
     .partikel {
         position: fixed;
@@ -526,8 +548,11 @@
     }
 
     @keyframes semburan {
-        0%   { opacity: 1; transform: translate(-50%, -50%) scale(.3) rotate(0deg); }
-        65%  { opacity: 1; }
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(.3) rotate(0deg);
+        }
+        65% { opacity: 1; }
         100% {
             opacity: 0;
             transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(var(--rot));
@@ -559,7 +584,7 @@
 
     @keyframes asap {
         0%   { opacity: .85; transform: translate(0, 0) scale(.6); }
-        100% { opacity: 0;   transform: translate(10px, -70px) scale(3.2); }
+        100% { opacity: 0; transform: translate(10px, -70px) scale(3.2); }
     }
 
     /* ================= SURAT ================= */
@@ -640,6 +665,26 @@
 
     .pengirim.tampil { opacity: 1; }
 
+    /* TOMBOL LANJUT SETELAH SURAT SELESAI */
+    .tombol-lanjut {
+        display: block;
+        margin: 35px auto 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(12px);
+        transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .tombol-lanjut.siap {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .tombol-lanjut.siap:hover {
+        transform: translateY(-3px);
+    }
+
     /* ================= MUSIK & HATI ================= */
 
     #tombolMusik {
@@ -654,7 +699,7 @@
         color: white;
         font-size: 20px;
         cursor: pointer;
-        z-index: 1000;
+        z-index: 20000;
         box-shadow: 0 8px 20px rgba(150, 30, 80, .2);
     }
 
@@ -680,49 +725,723 @@
         to   { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
+    /* =========================================================
+       TAMBAHAN SLIDE BARU
+       ========================================================= */
+
+    #extraSlides {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 600;
+        overflow: hidden;
+        background: radial-gradient(circle at top, #fff8fb 0%, #ffdce8 50%, #ffc2d8 100%);
+    }
+
+    #extraSlides.aktif {
+        display: block;
+        animation: extraFade .8s ease forwards;
+    }
+
+    @keyframes extraFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .extra-slide {
+        min-height: 100vh;
+        height: 100vh;
+        width: 100%;
+        padding: 70px 25px 105px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+        inset: 0;
+        overflow-y: auto;
+        animation: slideMasuk .55s ease both;
+    }
+
+    .extra-slide.aktif-slide { display: flex; }
+
+    @keyframes slideMasuk {
+        from { opacity: 0; transform: translateY(12px) scale(.99); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .slide-navigation {
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        right: 0;
+        bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 16px;
+        pointer-events: none;
+    }
+
+    .slide-navigation .next-button { pointer-events: auto; margin-top: 0; }
+
+    .slide-count {
+        position: absolute;
+        left: 18px;
+        bottom: 36px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: #a04a6c;
+        opacity: .8;
+    }
+
+    .extra-content {
+        width: min(750px, 100%);
+        position: relative;
+        z-index: 2;
+    }
+
+    .extra-small {
+        font-size: 13px;
+        letter-spacing: 3px;
+        color: #a04a6c;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .extra-title {
+        font-family: "Parisienne", cursive;
+        font-size: clamp(48px, 9vw, 78px);
+        color: #ad3768;
+        font-weight: 400;
+        margin: 0 0 20px;
+    }
+
+    .extra-text {
+        font-size: 16px;
+        line-height: 2;
+        color: #63354a;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    /* FOTO BEBE */
+
+    .foto-bebe {
+        width: 230px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 25px;
+        padding: 7px;
+        background: rgba(255,255,255,.8);
+        box-shadow:
+            0 15px 40px rgba(130,30,70,.18),
+            0 0 0 1px rgba(190,70,110,.12);
+        transform: rotate(-2deg);
+        transition: transform .5s ease;
+        margin-bottom: 25px;
+    }
+
+    .foto-bebe:hover {
+        transform: rotate(0deg) scale(1.03);
+    }
+
+    /* KARTU KECIL */
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 35px;
+    }
+
+    .card {
+        background: rgba(255,255,255,.65);
+        border: 1px solid rgba(190,70,110,.12);
+        border-radius: 22px;
+        padding: 25px 18px;
+        box-shadow: 0 12px 30px rgba(130,30,70,.08);
+        transition: transform .3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+    }
+
+    .card-icon {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .card h3 {
+        margin: 0 0 10px;
+        color: #a83262;
+        font-size: 17px;
+    }
+
+    .card p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #70425a;
+    }
+
+    /* VIRTUAL */
+
+    .virtual-box {
+        background: rgba(255,255,255,.62);
+        border-radius: 30px;
+        padding: 40px 30px;
+        box-shadow: 0 15px 40px rgba(130,30,70,.09);
+        border: 1px solid rgba(190,70,110,.12);
+    }
+
+    .virtual-heart {
+        font-size: 60px;
+        animation: heartFloat 2s ease-in-out infinite alternate;
+        margin-bottom: 15px;
+    }
+
+    @keyframes heartFloat {
+        to { transform: translateY(-8px) scale(1.08); }
+    }
+
+    /* PESAN PENUTUP */
+
+    .closing {
+        font-family: "Parisienne", cursive;
+        font-size: clamp(42px, 8vw, 70px);
+        color: #ad3768;
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+
+    .closing-small {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #63354a;
+    }
+
+    .scroll-hint {
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: #a04a6c;
+        opacity: .7;
+        animation: hint 1.5s infinite alternate;
+    }
+
+    @keyframes hint {
+        to { transform: translateX(-50%) translateY(6px); opacity: 1; }
+    }
+
+    .next-button {
+        margin-top: 30px;
+        padding: 13px 24px;
+        border: none;
+        border-radius: 30px;
+        background: #e85d91;
+        color: white;
+        font-family: inherit;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(194,50,100,.2);
+        transition: .3s ease;
+    }
+
+    .next-button:hover {
+        transform: translateY(-3px);
+    }
+
+    /* =========================================================
+       TRANSISI KE PENUTUP
+       ========================================================= */
+
+    #transisi {
+        position: fixed;
+        inset: 0;
+        z-index: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 30px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 40%, #a8346a 0%, #7d2348 45%, #4a1230 100%);
+        visibility: hidden;
+        clip-path: circle(0% at var(--cx, 50%) var(--cy, 90%));
+        transition: clip-path 1.8s cubic-bezier(.65, 0, .2, 1), opacity 1.6s ease, visibility 0s linear 1.8s;
+    }
+
+    #transisi.muncul {
+        visibility: visible;
+        clip-path: circle(150% at var(--cx, 50%) var(--cy, 90%));
+        transition: clip-path 1.8s cubic-bezier(.65, 0, .2, 1), opacity 1.6s ease, visibility 0s;
+    }
+
+    #transisi.pudar {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .transisi-hati {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-family: Arial, sans-serif;
+        font-size: 190px;
+        line-height: 1;
+        color: rgba(255, 190, 215, .12);
+        transform: translate(-50%, -50%) scale(.8);
+        animation: transisiHati 2.4s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes transisiHati {
+        0%, 100% { transform: translate(-50%, -50%) scale(.85); opacity: .5; }
+        50%      { transform: translate(-50%, -50%) scale(1.1);  opacity: 1; }
+    }
+
+    .transisi-baris {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        top: 50%;
+        font-family: "Parisienne", cursive;
+        font-size: clamp(34px, 7vw, 58px);
+        line-height: 1.35;
+        color: #ffdce8;
+        text-shadow: 0 0 25px rgba(255, 170, 205, .45);
+        opacity: 0;
+        transform: translateY(-40%) scale(.97);
+        filter: blur(8px);
+        transition: opacity 1.4s ease, transform 1.8s cubic-bezier(.2, .8, .2, 1), filter 1.4s ease;
+    }
+
+    .transisi-baris.tampil {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+        filter: blur(0);
+    }
+
+    .kelopak-t {
+        position: absolute;
+        top: -40px;
+        width: 14px;
+        height: 18px;
+        background: linear-gradient(135deg, #ffb6d0, #ff7fae);
+        border-radius: 80% 0 80% 0;
+        opacity: 0;
+        pointer-events: none;
+        animation: kelopakJatuh var(--dur, 7s) linear var(--delay, 0s) infinite;
+    }
+
+    @keyframes kelopakJatuh {
+        0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+        10%  { opacity: .85; }
+        50%  { transform: translate3d(var(--sway, 40px), 55vh, 0) rotate(220deg); }
+        90%  { opacity: .75; }
+        100% { transform: translate3d(calc(var(--sway, 40px) * -1), 112vh, 0) rotate(480deg); opacity: 0; }
+    }
+
+    /* =========================================================
+       PENUTUP ROMANTIS (LANGIT MALAM + HATI)
+       ========================================================= */
+
+    #finale {
+        position: fixed;
+        inset: 0;
+        z-index: 750;
+        overflow: hidden;
+        background: radial-gradient(ellipse at 50% 42%, #123F9C 0%, #0B2463 32%, #071536 65%, #020817 100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 2.2s ease, visibility 0s linear 2.2s;
+    }
+
+    #finale.aktif {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 2.2s ease;
+    }
+
+    #finaleCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .finale-teks {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 4%;
+        height: 280px;
+        padding: 0 24px;
+        pointer-events: none;
+    }
+
+    .finale-baris {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 60px;
+        text-align: center;
+        font-family: "Parisienne", cursive;
+        font-size: clamp(30px, 6vw, 50px);
+        line-height: 1.4;
+        color: #d9f2ff;
+        text-shadow: 0 0 22px rgba(80, 190, 255, .6);
+        opacity: 0;
+        transform: translateY(16px);
+        filter: blur(7px);
+        transition: opacity 1.4s ease, transform 1.6s cubic-bezier(.2, .8, .2, 1), filter 1.4s ease;
+    }
+
+    .finale-baris.tampil {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+    .finale-akhir {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(18px);
+        filter: blur(8px);
+        transition: opacity 2s ease, transform 2s cubic-bezier(.2, .8, .2, 1), filter 2s ease;
+    }
+
+    .finale-akhir.tampil {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+    .finale-judul {
+        font-family: "Parisienne", cursive;
+        font-size: clamp(46px, 10vw, 80px);
+        line-height: 1.15;
+        margin: 0;
+        background: linear-gradient(90deg, #d9f2ff, #63c7ff, #d9f2ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 18px rgba(80, 180, 255, .55));
+    }
+
+    .finale-sub {
+        margin: 12px 0 0;
+        font-size: 15px;
+        line-height: 1.9;
+        color: #bfe9ff;
+        max-width: 520px;
+    }
+
+    .finale-ttd {
+        margin-top: 12px;
+        font-family: "Parisienne", cursive;
+        font-size: 28px;
+        color: #8dd8ff;
+    }
+
+    .finale-ulang {
+        margin-top: 14px;
+        padding: 10px 22px;
+        border: 1px solid rgba(130, 210, 255, .5);
+        border-radius: 30px;
+        background: rgba(255, 255, 255, .06);
+        color: #d9f2ff;
+        font-family: inherit;
+        font-size: 13px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        pointer-events: auto;
+        transition: background .3s ease, transform .3s ease;
+    }
+
+    .finale-ulang:hover {
+        background: rgba(255, 255, 255, .14);
+        transform: translateY(-2px);
+    }
+
+    .finale-hint {
+        margin-top: 8px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: rgba(170, 220, 255, .65);
+    }
+
+    /* =========================================================
+       PENUTUP GALAKSI CINTA
+       ========================================================= */
+
+    #finale { touch-action: none; }
+
+    #finaleCanvas { transition: opacity .6s ease; }
+    #finaleCanvas.redup { opacity: .22; }
+
+    .intro-card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(430px, 88vw);
+        padding: 38px 28px 34px;
+        text-align: center;
+        border-radius: 28px;
+        background: linear-gradient(160deg, rgba(13, 38, 85, .78), rgba(3, 8, 25, .88));
+        border: 1px solid rgba(100, 190, 255, .24);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, .55), inset 0 0 40px rgba(55, 150, 255, .12);
+        backdrop-filter: blur(8px);
+        z-index: 5;
+        transition: opacity 1.1s ease, transform 1.1s ease;
+    }
+
+    .intro-card.hilang {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.88);
+        pointer-events: none;
+    }
+
+    .intro-judul {
+        margin: 0;
+        font-family: "Playfair Display", "Lora", serif;
+        font-weight: 700;
+        font-size: clamp(30px, 7vw, 40px);
+        line-height: 1.2;
+        color: #fff;
+        text-shadow: 0 0 20px rgba(140, 210, 255, .65);
+    }
+
+    .intro-stiker {
+        font-size: 68px;
+        margin: 18px 0 14px;
+        filter: drop-shadow(0 6px 14px rgba(70, 170, 255, .4));
+        animation: heartFloat 2.2s ease-in-out infinite alternate;
+    }
+
+    .intro-sub {
+        margin: 0 0 22px;
+        font-size: 12px;
+        letter-spacing: 2.5px;
+        color: #bfe7ff;
+    }
+
+    .intro-btn {
+        padding: 13px 26px;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #329dff, #a7e5ff);
+        color: #061b3d;
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        box-shadow: 0 8px 28px rgba(50, 157, 255, .4);
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .intro-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 34px rgba(50, 157, 255, .6);
+    }
+
+    .alam-hint {
+        position: absolute;
+        top: max(18px, env(safe-area-inset-top));
+        left: 0;
+        right: 0;
+        padding: 0 24px;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        color: rgba(180, 225, 255, .82);
+        opacity: 0;
+        transition: opacity 1.5s ease;
+        pointer-events: none;
+        z-index: 4;
+    }
+
+    .alam-hint.tampil { opacity: 1; }
+
+    .kartu-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .5s ease, visibility 0s linear .5s;
+    }
+
+    .kartu-overlay.buka {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity .5s ease;
+    }
+
+    .kartu {
+        width: min(360px, 100%);
+        padding: 16px 16px 24px;
+        text-align: center;
+        border-radius: 24px;
+        background: linear-gradient(160deg, rgba(13, 38, 85, .96), rgba(3, 8, 25, .98));
+        border: 1px solid rgba(100, 190, 255, .28);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, .6), 0 0 40px rgba(45, 145, 255, .2);
+        transform: translateY(20px) scale(.94);
+        transition: transform .6s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .kartu-overlay.buka .kartu { transform: none; }
+
+    .kartu-media {
+        height: 200px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 40%, #164d91, #03091b);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+
+    .kartu-media img { width: 100%; height: 100%; object-fit: cover; }
+
+    .kartu-emoji {
+        font-size: 92px;
+        filter: drop-shadow(0 8px 18px rgba(70, 170, 255, .45));
+        animation: heartFloat 2s ease-in-out infinite alternate;
+    }
+
+    .kartu h3 {
+        margin: 0 0 8px;
+        font-family: "Playfair Display", "Lora", serif;
+        font-size: 24px;
+        color: #fff;
+        text-shadow: 0 0 16px rgba(140, 210, 255, .5);
+    }
+
+    .kartu p {
+        margin: 0 0 20px;
+        padding: 0 8px;
+        font-size: 14px;
+        line-height: 1.8;
+        color: #c5eaff;
+    }
+
+    .kartu button {
+        padding: 10px 24px;
+        border-radius: 30px;
+        border: 1px solid rgba(130, 210, 255, .45);
+        background: rgba(255, 255, 255, .05);
+        color: #d9f2ff;
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 2px;
+        cursor: pointer;
+    }
+
+    .finale-judul { font-size: clamp(36px, 7vw, 60px); }
+
+    /* ================= RESPONSIVE ================= */
+
     @media (max-width: 700px) {
-        .opening-heart { left: 78%; font-size: 105px; }
+        .opening-heart {
+            left: 78%;
+            font-size: 105px;
+        }
 
         .shockwave { left: 78%; }
 
-        .archer { left: 0; transform: translateY(-50%) scale(.72); }
+        .archer {
+            left: 0;
+            transform: translateY(-50%) scale(.72);
+        }
 
         #opening.fade-archer .archer {
             transform: translateY(-50%) translateX(-25px) scale(.65);
         }
 
-        .opening-text { bottom: 8%; font-size: 15px; }
+        .opening-text {
+            bottom: 8%;
+            font-size: 15px;
+        }
 
-        .letter { padding: 25px 20px; }
+        .opening-note {
+            font-size: 12px;
+        }
+
+        .letter {
+            padding: 25px 20px;
+        }
 
         h1 { font-size: 55px; }
+
+        .cards {
+            grid-template-columns: 1fr;
+        }
+
+        .extra-slide {
+            padding: 60px 20px;
+        }
+
+        .foto-bebe {
+            width: 200px;
+            height: 260px;
+        }
+
+        .extra-text {
+            font-size: 15px;
+        }
+
+        .virtual-box {
+            padding: 30px 20px;
+        }
+
+        .finale-sub { font-size: 14px; }
+
+        .transisi-hati { font-size: 140px; }
     }
 </style>
 </head>
+
 <body>
 
 <div id="opening">
 
-    <!-- LOVE -->
     <div class="opening-heart" id="openingHeart">♥</div>
 
-    <!-- GELOMBANG SAAT KENA -->
     <div class="shockwave"></div>
     <div class="shockwave dua"></div>
 
-    <!-- BUSUR -->
     <div class="archer">
 
         <div class="bow"></div>
 
-        <!-- TALI -->
         <div class="bow-string">
             <svg viewBox="0 0 100 230" preserveAspectRatio="none">
                 <path id="stringPath" d="M0 0 Q0 115 0 230"></path>
             </svg>
         </div>
 
-        <!-- PANAH -->
         <div class="arrow" id="arrow">
             <span class="arrow-shaft"></span>
             <span class="arrow-head">➤</span>
@@ -731,16 +1450,18 @@
 
     </div>
 
-    <!-- TEKS -->
     <p class="opening-text">
-        HAII SAYANGGG TOLONG DI KLIK YAA 💗
+        HAII SAYANGGG, TARIK BUSURNYA KE KIRI YAA 💗
         <br>
-        <small>KLIK WOII!!!</small>
+        <small>TAHAN, TARIK, LALU LEPAS!!!</small>
+        <span class="opening-note">💕 TEKAN TERUS GESER KE KIRI BEBEE 💕</span>
     </p>
 
 </div>
 
+
 <main id="main">
+
     <div class="container">
 
         <h1>
@@ -752,53 +1473,395 @@
         <div class="subtitle" id="subtitle"></div>
 
         <div class="cake-area">
+
             <div class="cake">
 
                 <div class="cake-shadow"></div>
 
-                <div class="candle one"><div class="flame"></div></div>
-                <div class="candle two"><div class="flame"></div></div>
-                <div class="candle three"><div class="flame"></div></div>
+                <div class="candle one">
+                    <div class="flame"></div>
+                </div>
+
+                <div class="candle two">
+                    <div class="flame"></div>
+                </div>
+
+                <div class="candle three">
+                    <div class="flame"></div>
+                </div>
 
                 <div class="cream"></div>
                 <div class="cake-top"></div>
                 <div class="cake-bottom"></div>
 
             </div>
+
         </div>
 
-        <button class="btn" id="tiup">Tiup lilinnya dong sayangg 🕯️</button>
+        <button class="btn" id="tiup">
+            Tiup lilinnya dong sayangg 🕯️
+        </button>
 
     </div>
+
 </main>
 
+
+<!-- ================= SURAT ================= -->
+
 <section id="suratSlide">
+
     <div class="letter">
-        <div class="letter-title">UNTUK BEBEHH</div>
+
+        <div class="letter-title">
+            UNTUK BEBEHH
+        </div>
+
         <div id="surat"></div>
+
         <div class="pengirim" id="pengirim"></div>
+
+        <button id="tombolLanjut" class="btn tombol-lanjut">
+            Tekann inii sayangg 💗
+        </button>
+
     </div>
+
 </section>
 
-<audio id="lagu" src="something about you.mp3" loop preload="auto"></audio>
 
-<button id="tombolMusik">🎵</button>
+<!-- =========================================================
+     SLIDE TAMBAHAN
+     ========================================================= -->
+
+<section id="extraSlides">
+
+    <!-- SLIDE 1 -->
+    <div class="extra-slide">
+
+        <div class="extra-content">
+
+            <div class="extra-small">
+                satu foto dari banyak hal yang aku suka dari kamu
+            </div>
+
+            <img
+                src="foto-bebe.jpg"
+                alt="Foto bebe"
+                class="foto-bebe"
+            >
+
+            <h2 class="extra-title">
+                Wujud asli si imut💗
+            </h2>
+
+            <p class="extra-text">
+                Sebenernya aku bingung mau nulis apaa,
+                soalnya kalau tentang kamu bisa panjang bangettt.
+                Tapi intinyaa aku senengg bisa kenal sama kamuu
+                dan bisa punya seseorang yang sesayang ini sama akuu.
+            </p>
+
+        </div>
+
+        <div class="scroll-hint">
+            scroll ke bawah ↓
+        </div>
+
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="extra-slide">
+
+        <div class="extra-content">
+
+            <div class="extra-small">
+                sedikit tentang kamu
+            </div>
+
+            <h2 class="extra-title">
+                Kenapa Kamu Spesial?
+            </h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-icon">💗</div>
+
+                    <h3>
+                        Cara Kamu
+                    </h3>
+
+                    <p>
+                        Akuu sukaa cara kamuu ngobrol,
+                        cara kamuu cerita,
+                        bahkan hal kecil dari kamuu
+                        yang mungkin kamuu sendiri ga sadar.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-icon">🌷</div>
+
+                    <h3>
+                        Bikin Nyaman
+                    </h3>
+
+                    <p>
+                        Entah kenapaa ngobrol sama kamuu
+                        tuh rasanya beda.
+                        Kadang cuma chat biasa aja
+                        tapi bisa bikin hari akuu lebih baik.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">✨</div>
+
+                    <h3>
+                        Kamu Ya Kamu
+                    </h3>
+
+                    <p>
+                        Akuu ga perlu kamuu jadi orang lain.
+                        Tetep jadi kamuu yang akuu kenal,
+                        yang kadang ngambek,
+                        kadang ngeselin,
+                        tapi tetep aku sayangg.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="extra-slide">
+
+        <div class="extra-content">
+
+            <div class="virtual-box">
+
+                <div class="virtual-heart">
+                    💗
+                </div>
+
+                <div class="extra-small">
+                    walaupun kita masih virtual
+                </div>
+
+                <h2 class="extra-title">
+                    Jauh di Layar,
+                    <br>
+                    Dekat di Hati
+                </h2>
+
+                <p class="extra-text">
+                    Akuu tauu kitaa masih virtual,
+                    belum bisa ketemu langsung,
+                    belum bisa ngasih sesuatu secara langsung
+                    kayak orang lain.
+                    <br><br>
+
+                    Tapii bukan berarti apa yang akuu rasain
+                    ke kamuu jadi kurang berarti.
+                    Justru dari semua chat,
+                    semua cerita,
+                    semua waktu yang kita luangin buat satu sama lain,
+                    akuu ngerasa beruntung bisa kenal sama kamuu.
+                    <br><br>
+
+                    Semogaa suatu hari nanti
+                    kitaa bisa ketemu beneran yaa sayangg.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="extra-slide">
+
+        <div class="extra-content">
+
+            <div class="extra-small">
+                buat kamu yang ulang tahun hari ini
+            </div>
+
+            <div class="closing">
+                Jangan berubah yaa sayangg 💗
+            </div>
+
+            <p class="closing-small">
+                Tetep jadi bebe yang akuu kenal.
+                Tetep jadi orang yang bikin akuu seneng
+                cuma gara-gara satu notif dari kamuu.
+                <br><br>
+
+                Sekali lagi,
+                selamat ulang tahunn sayangg.
+                Panjang umur, sehat selalu,
+                semogaa semua yang kamuu mau
+                bisa tercapaii.
+                <br><br>
+
+                Akuu sayangg banget sama kamuu.
+                I LOVEE YOUU 💗
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- SLIDE 5 PENUTUP (tombolnya membuka transisi + penutup romantis) -->
+    <div class="extra-slide">
+
+        <div class="extra-content">
+
+            <div class="extra-small">
+                sebelum website ini selesai...
+            </div>
+
+            <div class="closing">
+                Happy Birthday,
+                <br>
+                Bebehh 💗
+            </div>
+
+            <p class="closing-small">
+                Makasihh udah hadir di hidup akuu.
+                <br>
+                Makasihh udah bertahan sejauh ini sama akuu.
+                <br><br>
+
+                Semogaa tahun ini jadi tahun yang
+                jauhh lebih baik buat kamuu.
+                <br><br>
+
+                Dari seseorang yang selalu sayang sama kamu,
+                <br>
+                <b>MASA DEPAN KAMU 💗</b>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRANSISI KE PENUTUP
+     ========================================================= -->
+
+<section id="transisi">
+    <div class="transisi-hati">♥</div>
+    <div class="transisi-baris" id="transisiBaris1">Sebentar yaa sayangg...</div>
+    <div class="transisi-baris" id="transisiBaris2">Ada satu hal terakhir yang pengen akuu kasih buat kamuu 💗</div>
+</section>
+
+
+<!-- =========================================================
+     PENUTUP ROMANTIS
+     ========================================================= -->
+
+<section id="finale">
+
+    <canvas id="finaleCanvas"></canvas>
+
+    <div class="intro-card" id="introCard">
+        <h2 class="intro-judul">Galaksi Cinta<br>untuk Kamu</h2>
+        <div class="intro-stiker">🐰💗</div>
+        <p class="intro-sub">SELAMAT ULANG TAHUN, SAYANGG</p>
+        <button class="intro-btn" id="masukAlam" type="button">MASUK KE SEMESTA KITA</button>
+    </div>
+
+    <div class="alam-hint" id="alamHint">geser untuk memutar galaksi ✦ sentuh stiker untuk membuka pesan 💗</div>
+
+    <div class="kartu-overlay" id="kartuOverlay">
+        <div class="kartu">
+            <div class="kartu-media" id="kartuMedia"></div>
+            <h3 id="kartuJudul"></h3>
+            <p id="kartuIsi"></p>
+            <button id="kartuTutup" type="button">KEMBALI 💗</button>
+        </div>
+    </div>
+
+
+    <div class="finale-teks">
+
+        <div class="finale-baris" id="finaleBaris"></div>
+
+        <div class="finale-akhir" id="finaleAkhir">
+            <h2 class="finale-judul">Happy Birthday, Bebe 💗</h2>
+            <p class="finale-sub">
+                Akuu sayangg sama kamuu,
+                hari ini, besok, dan seterusnyaa.
+            </p>
+            <div class="finale-ttd">— MASA DEPAN KAMU</div>
+            <button class="finale-ulang" id="finaleUlang" type="button">Putar ulang 💗</button>
+            <div class="finale-hint">sentuh layarnya kalau mau kirim hati ♡</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MUSIK ================= -->
+
+<audio
+    id="lagu"
+    src="something about you.mp3"
+    loop
+    preload="auto">
+</audio>
+
+<button id="tombolMusik">
+    🎵
+</button>
+
 
 <script>
+
     const NAMA = "BEBE";
     const SUBTITLE = "HEPIBESDEYY BEBEE💗";
 
+
     const SURAT = [
+
         "Sayanggg, selamat ulang tahunn bebehh panjang umurr, sehat selaluu, ngambeknya di kuranginn.",
+
         "Akuu sayang banget sama kamuu, aku harap kamu jugaa gituu.",
+
         "Makasihh yaa sayangg udahh mau sama akuu, aku merasa jadi orang yang paling berutungg bisa dapat pacar kayak akmuu.",
+
         "Semogaa kitaa sama sama terus yaa sellamanyaa jangan putuss putuss.",
+
         "Maaf yaa cuman bisa ngasih kayak ginii aku mau ngirim kado tapi kamu gamau ngirim alamat kamu :(.",
+
         "DAH AKU GA PANDAI NULIS SURAT PANJANG PANJANG AOKWOAKOWKOAKW INTINYAA.",
+
         "Selamat ulang tahun, sayangg. I LOVEE YOUU. 💗"
+
     ];
 
+
     const PENGIRIM = "MASA DEPAN KAMU 💗";
+
+    /* Kalimat yang muncul satu per satu di penutup */
+    const BARIS_FINALE = [
+        "Di dunia yang seluas inii...",
+        "akuu bersyukur hatiku bisa ketemu kamuu 💗",
+        "Walaupun cuma lewat layar,\nrasa ini nyata banget, sayangg.",
+        "Dan suatu hari nanti,\nakuu pengen peluk kamuu beneran. ♡"
+    ];
+
 
     const opening      = document.getElementById("opening");
     const main         = document.getElementById("main");
@@ -809,320 +1872,1564 @@
     const pengirim     = document.getElementById("pengirim");
     const stringPath   = document.getElementById("stringPath");
     const arrow        = document.getElementById("arrow");
+    const extraSlides  = document.getElementById("extraSlides");
+
 
     document.getElementById("nama").textContent = NAMA;
     document.getElementById("subtitle").textContent = SUBTITLE;
     pengirim.textContent = PENGIRIM;
 
+
     /* ================= SUARA ================= */
 
     function suaraPanah() {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        const audioCtx =
+            new (window.AudioContext || window.webkitAudioContext)();
+
         const oscillator = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
         oscillator.type = "sine";
-        oscillator.frequency.setValueAtTime(700, audioCtx.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + .35);
 
-        gain.gain.setValueAtTime(.12, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + .35);
+        oscillator.frequency.setValueAtTime(
+            700,
+            audioCtx.currentTime
+        );
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            180,
+            audioCtx.currentTime + .35
+        );
+
+        gain.gain.setValueAtTime(
+            .12,
+            audioCtx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audioCtx.currentTime + .35
+        );
 
         oscillator.connect(gain);
         gain.connect(audioCtx.destination);
+
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + .35);
     }
 
+
     function suaraKena() {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        const audioCtx =
+            new (window.AudioContext || window.webkitAudioContext)();
+
         const oscillator = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
         oscillator.type = "sine";
-        oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + .25);
 
-        gain.gain.setValueAtTime(.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + .4);
+        oscillator.frequency.setValueAtTime(
+            500,
+            audioCtx.currentTime
+        );
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            900,
+            audioCtx.currentTime + .25
+        );
+
+        gain.gain.setValueAtTime(
+            .15,
+            audioCtx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audioCtx.currentTime + .4
+        );
 
         oscillator.connect(gain);
         gain.connect(audioCtx.destination);
+
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + .4);
     }
 
-    /* ================= TALI & PANAH ================= */
 
-    function taliTarik() {
-        const start = performance.now();
-        const duration = 650;
+    /* ================= HITUNG JARAK PANAH ================= */
 
-        function animasi(waktu) {
-            const progress = Math.min((waktu - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-
-            /* 0 = lurus, -65 = tertarik ke belakang */
-            const tengah = -65 * eased;
-
-            stringPath.setAttribute("d", `M0 0 Q${tengah} 115 0 230`);
-
-            /* panah ikut tertarik ke belakang */
-            arrow.style.transform = `translateX(${-65 * eased}px)`;
-
-            if (progress < 1) requestAnimationFrame(animasi);
-        }
-
-        requestAnimationFrame(animasi);
-    }
-
-    function taliLepas() {
-        const start = performance.now();
-        const duration = 300;
-
-        function animasi(waktu) {
-            const progress = Math.min((waktu - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-
-            const tengah = -65 + (65 * eased);
-
-            stringPath.setAttribute("d", `M0 0 Q${tengah} 115 0 230`);
-
-            if (progress < 1) {
-                requestAnimationFrame(animasi);
-            } else {
-                stringPath.setAttribute("d", "M0 0 Q0 115 0 230");
-            }
-        }
-
-        requestAnimationFrame(animasi);
-    }
-
-    /* hitung jarak panah ke love supaya pas di semua ukuran layar */
     function hitungJarakPanah() {
-        const arrowRect = arrow.getBoundingClientRect();
-        const heartRect = openingHeart.getBoundingClientRect();
 
-        /* skala (mode HP: busur di-scale) */
-        const skala = arrow.offsetWidth ? arrowRect.width / arrow.offsetWidth : 1;
+        const arrowRect =
+            arrow.getBoundingClientRect();
 
-        const ujungPanah = arrowRect.right - (18 * skala);
-        const targetX = heartRect.left + heartRect.width * 0.4;
+        const heartRect =
+            openingHeart.getBoundingClientRect();
 
-        /* translateX bekerja di ruang lokal (sebelum scale), jadi dibagi skala */
-        const jarak = (targetX - ujungPanah) / skala;
+        const skala =
+            arrow.offsetWidth
+                ? arrowRect.width / arrow.offsetWidth
+                : 1;
 
-        arrow.style.setProperty("--jarak", jarak + "px");
+        const ujungPanah =
+            arrowRect.right - (18 * skala);
+
+        const targetX =
+            heartRect.left + heartRect.width * 0.4;
+
+        const jarak =
+            (targetX - ujungPanah) / skala;
+
+        arrow.style.setProperty(
+            "--jarak",
+            jarak + "px"
+        );
     }
+
 
     /* ================= PARTIKEL ================= */
 
-    function semburHati(x, y, jumlah, jarakMin, jarakMax, gravitasi, warna) {
+    function semburHati(
+        x,
+        y,
+        jumlah,
+        jarakMin,
+        jarakMax,
+        gravitasi,
+        warna
+    ) {
+
         const palet = warna
             ? [warna]
-            : ["#ff9fbe", "#f06c9c", "#e85d91", "#ffdce8", "#ffb347", "#fff8fb"];
+            : [
+                "#ff9fbe",
+                "#f06c9c",
+                "#e85d91",
+                "#ffdce8",
+                "#ffb347",
+                "#fff8fb"
+            ];
+
 
         for (let i = 0; i < jumlah; i++) {
-            const p = document.createElement("div");
-            const sudut = Math.random() * Math.PI * 2;
-            const jarak = jarakMin + Math.random() * (jarakMax - jarakMin);
+
+            const p =
+                document.createElement("div");
+
+            const sudut =
+                Math.random() * Math.PI * 2;
+
+            const jarak =
+                jarakMin +
+                Math.random() *
+                (jarakMax - jarakMin);
+
 
             p.className = "partikel";
-            p.textContent = Math.random() < .75 ? "♥" : "✦";
-            p.style.left = x + "px";
-            p.style.top = y + "px";
-            p.style.color = palet[Math.floor(Math.random() * palet.length)];
-            p.style.fontSize = 12 + Math.random() * 18 + "px";
-            p.style.setProperty("--dx", Math.cos(sudut) * jarak + "px");
-            p.style.setProperty("--dy", Math.sin(sudut) * jarak + gravitasi + "px");
-            p.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
-            p.style.setProperty("--dur", (1 + Math.random() * .8) + "s");
+
+            p.textContent =
+                Math.random() < .75
+                    ? "♥"
+                    : "✦";
+
+            p.style.left =
+                x + "px";
+
+            p.style.top =
+                y + "px";
+
+            p.style.color =
+                palet[
+                    Math.floor(
+                        Math.random() *
+                        palet.length
+                    )
+                ];
+
+            p.style.fontSize =
+                12 +
+                Math.random() * 18 +
+                "px";
+
+            p.style.setProperty(
+                "--dx",
+                Math.cos(sudut) *
+                jarak +
+                "px"
+            );
+
+            p.style.setProperty(
+                "--dy",
+                Math.sin(sudut) *
+                jarak +
+                gravitasi +
+                "px"
+            );
+
+            p.style.setProperty(
+                "--rot",
+                (Math.random() * 720 - 360) +
+                "deg"
+            );
+
+            p.style.setProperty(
+                "--dur",
+                (1 + Math.random() * .8) +
+                "s"
+            );
+
 
             document.body.appendChild(p);
 
-            setTimeout(function () { p.remove(); }, 2000);
+
+            setTimeout(
+                function () {
+                    p.remove();
+                },
+                2000
+            );
         }
     }
 
-    /* ================= KLIK OPENING ================= */
 
-    opening.addEventListener("click", function () {
+    /* ================= TARIK BUSUR ================= */
 
-        if (
-            opening.classList.contains("shoot") ||
-            opening.classList.contains("hit") ||
-            opening.classList.contains("selesai")
-        ) {
+    const MAX_TARIK = 70;
+    let tarik = 0;
+    let menarik = false;
+    let startX = 0;
+    let sudahTembak = false;
+
+    function setTarik(v) {
+        tarik = v;
+        stringPath.setAttribute("d", "M0 0 Q" + (-v) + " 115 0 230");
+        arrow.style.transform = "translateX(" + (-v) + "px)";
+    }
+
+    function animasiTali(dari, ke, durasi, selesai) {
+        const mulai = performance.now();
+        function langkah(waktu) {
+            const prog = Math.min((waktu - mulai) / durasi, 1);
+            const eased = 1 - Math.pow(1 - prog, 3);
+            setTarik(dari + (ke - dari) * eased);
+            if (prog < 1) {
+                requestAnimationFrame(langkah);
+            } else if (selesai) {
+                selesai();
+            }
+        }
+        requestAnimationFrame(langkah);
+    }
+
+    function skalaArcher() {
+        return arrow.offsetWidth
+            ? arrow.getBoundingClientRect().width / arrow.offsetWidth
+            : 1;
+    }
+
+    opening.addEventListener("pointerdown", function (e) {
+        if (sudahTembak) return;
+        menarik = true;
+        startX = e.clientX;
+        opening.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("pointermove", function (e) {
+        if (!menarik || sudahTembak) return;
+        const mentah = Math.max(0, (startX - e.clientX) / skalaArcher());
+        /* makin jauh makin berat, tidak bisa lewat batas */
+        setTarik(MAX_TARIK * Math.tanh(mentah / MAX_TARIK));
+        if (navigator.vibrate && tarik > 40 && Math.random() < .08) navigator.vibrate(8);
+    });
+
+    window.addEventListener("pointerup", function () {
+        if (!menarik || sudahTembak) return;
+        menarik = false;
+        opening.style.cursor = "grab";
+
+        if (tarik < 20) {
+            animasiTali(tarik, 0, 250);   /* kurang kuat, balik lagi */
             return;
         }
+        tembak();
+    });
 
-        /* hitung jarak sebelum panah ditarik */
+    window.addEventListener("pointercancel", function () {
+        if (!menarik || sudahTembak) return;
+        menarik = false;
+        animasiTali(tarik, 0, 250);
+    });
+
+    function tembak() {
+
+        sudahTembak = true;
+
+        const dariTarik = tarik;
+
+        /* hitung jarak dengan panah di posisi normal */
+        arrow.style.transform = "";
         hitungJarakPanah();
+        arrow.style.setProperty("--tarik", (-dariTarik) + "px");
 
-        /* tali + panah ditarik ke belakang */
-        taliTarik();
+        opening.classList.add("shoot");
+        animasiTali(dariTarik, 0, 300);
+        suaraPanah();
 
-        /* setelah ditarik, panah dilepaskan */
         setTimeout(function () {
-            opening.classList.add("shoot");
-            taliLepas();
-            suaraPanah();
-        }, 800);
 
-        /* panah kena love */
-        setTimeout(function () {
             opening.classList.add("hit");
             openingHeart.classList.add("kena");
             suaraKena();
 
-            /* ledakan hati kecil saat panah kena */
             const hr = openingHeart.getBoundingClientRect();
-            semburHati(hr.left + hr.width / 2, hr.top + hr.height / 2, 22, 90, 280, 0, "#ffdce8");
+
+            semburHati(
+                hr.left + hr.width / 2,
+                hr.top + hr.height / 2,
+                22, 90, 280, 0, "#ffdce8"
+            );
 
             setTimeout(function () {
                 opening.classList.add("fade-archer");
             }, 350);
-        }, 1800);
 
-        /* masuk halaman utama */
+        }, 1000);
+
         setTimeout(function () {
+
             opening.classList.add("selesai");
             main.classList.add("muncul");
+
             mulaiMusik();
 
-            /* tombol tiup aktif setelah animasi kue selesai */
             setTimeout(function () {
                 tombolTiup.classList.add("siap");
-            }, 5800);
+            }, 4300);
 
             setTimeout(function () {
                 opening.remove();
             }, 1600);
-        }, 3800);
-    });
+
+        }, 3000);
+    }
+
 
     /* ================= MUSIK ================= */
 
-    const lagu = document.getElementById("lagu");
-    const tombolMusik = document.getElementById("tombolMusik");
+    const lagu =
+        document.getElementById("lagu");
+
+    const tombolMusik =
+        document.getElementById("tombolMusik");
+
 
     function mulaiMusik() {
-        tombolMusik.classList.add("aktif");
+
+        tombolMusik.classList.add(
+            "aktif"
+        );
+
         lagu.volume = 0;
+
 
         const p = lagu.play();
 
+
         if (p && p.then) {
-            p.then(function () {
-                let volume = 0;
-                const target = .8;
-                const langkah = target / 30;
 
-                const fade = setInterval(function () {
-                    volume += langkah;
+            p.then(
+                function () {
 
-                    if (volume >= target) {
-                        volume = target;
-                        clearInterval(fade);
-                    }
+                    let volume = 0;
 
-                    lagu.volume = volume;
-                }, 100);
-            }).catch(function () {});
+                    const target = .8;
+
+                    const langkah =
+                        target / 30;
+
+
+                    const fade =
+                        setInterval(
+                            function () {
+
+                                volume += langkah;
+
+
+                                if (
+                                    volume >= target
+                                ) {
+
+                                    volume = target;
+
+                                    clearInterval(
+                                        fade
+                                    );
+                                }
+
+
+                                lagu.volume =
+                                    volume;
+
+                            },
+                            100
+                        );
+                }
+            ).catch(
+                function () {}
+            );
         }
     }
 
-    tombolMusik.addEventListener("click", function () {
-        if (lagu.paused) {
-            lagu.play();
-            tombolMusik.classList.add("aktif");
-        } else {
-            lagu.pause();
-            tombolMusik.classList.remove("aktif");
+
+    tombolMusik.addEventListener(
+        "click",
+        function () {
+
+            if (lagu.paused) {
+
+                lagu.play();
+
+                tombolMusik.classList.add(
+                    "aktif"
+                );
+
+            } else {
+
+                lagu.pause();
+
+                tombolMusik.classList.remove(
+                    "aktif"
+                );
+            }
+
         }
-    });
+    );
+
 
     /* ================= SURAT ================= */
 
     function tampilkanSurat() {
+
         suratElement.innerHTML = "";
 
-        SURAT.forEach(function (text, index) {
-            const p = document.createElement("p");
-            p.textContent = text;
-            suratElement.appendChild(p);
+        const tombolLanjut = document.getElementById("tombolLanjut");
+        tombolLanjut.classList.remove("siap");
+        pengirim.classList.remove("tampil");
 
-            setTimeout(function () {
-                p.classList.add("tampil");
-            }, 1700 + index * 1000);
-        });
+        SURAT.forEach(
+            function (text, index) {
 
-        setTimeout(function () {
-            pengirim.classList.add("tampil");
-        }, 1700 + SURAT.length * 1000);
+                const p = document.createElement("p");
+                p.textContent = text;
+                suratElement.appendChild(p);
+
+                setTimeout(
+                    function () {
+                        p.classList.add("tampil");
+                    },
+                    1700 + index * 1000
+                );
+            }
+        );
+
+        setTimeout(
+            function () {
+                pengirim.classList.add("tampil");
+                tombolLanjut.classList.add("siap");
+            },
+            1700 + SURAT.length * 1000
+        );
     }
+
+
+    /* ================= NAVIGASI SLIDE MANUAL ================= */
+    /* Slide tidak akan berpindah sendiri. Semua perpindahan hanya lewat tombol. */
+
+    const semuaSlide = Array.from(extraSlides.querySelectorAll(".extra-slide"));
+    let slideAktif = 0;
+
+    function tampilkanSlide(index) {
+        slideAktif = Math.max(0, Math.min(index, semuaSlide.length - 1));
+        semuaSlide.forEach(function (slide, i) {
+            slide.classList.toggle("aktif-slide", i === slideAktif);
+            if (i === slideAktif) slide.scrollTop = 0;
+        });
+    }
+
+    semuaSlide.forEach(function (slide, index) {
+        const navigasi = document.createElement("div");
+        navigasi.className = "slide-navigation";
+
+        const hitung = document.createElement("span");
+        hitung.className = "slide-count";
+        hitung.textContent = (index + 1) + " / " + semuaSlide.length;
+        navigasi.appendChild(hitung);
+
+        const tombol = document.createElement("button");
+        tombol.className = "next-button";
+        tombol.type = "button";
+        tombol.textContent = index === semuaSlide.length - 1
+            ? "Satu hal lagi yaa sayangg 💗"
+            : "Lanjut yaa sayangg 💗";
+        tombol.addEventListener("click", function () {
+            if (index === semuaSlide.length - 1) {
+                mulaiTransisi(tombol);
+            } else {
+                tampilkanSlide(index + 1);
+            }
+        });
+        navigasi.appendChild(tombol);
+        slide.appendChild(navigasi);
+    });
+
+    document.getElementById("tombolLanjut").addEventListener(
+        "click",
+        function () {
+            extraSlides.classList.add("aktif");
+            suratSlide.classList.remove("muncul");
+            suratSlide.style.visibility = "hidden";
+            tampilkanSlide(0);
+        }
+    );
+
 
     /* ================= TIUP LILIN ================= */
 
-    tombolTiup.addEventListener("click", function () {
+    tombolTiup.addEventListener(
+        "click",
+        function () {
 
-        tombolTiup.textContent = "Good girl💗💗";
-        tombolTiup.disabled = true;
+            tombolTiup.textContent =
+                "Good girl💗💗";
 
-        /* api padam satu per satu + asap */
-        document.querySelectorAll(".flame").forEach(function (flame, i) {
-            setTimeout(function () {
-                flame.classList.add("padam");
+            tombolTiup.disabled = true;
 
-                const asap = document.createElement("div");
-                asap.className = "smoke";
-                flame.parentElement.appendChild(asap);
 
-                setTimeout(function () { asap.remove(); }, 1600);
-            }, i * 180);
-        });
+            document
+                .querySelectorAll(".flame")
+                .forEach(
+                    function (flame, i) {
 
-        /* titik pusat kue = pusat reveal surat */
-        const cakeRect = document.querySelector(".cake").getBoundingClientRect();
-        const cx = cakeRect.left + cakeRect.width / 2;
-        const cy = cakeRect.top + cakeRect.height / 2;
+                        setTimeout(
+                            function () {
 
-        /* hati meledak dari kue */
-        setTimeout(function () {
-            semburHati(cx, cy - 40, 36, 100, 320, 140);
-        }, 600);
+                                flame.classList.add(
+                                    "padam"
+                                );
 
-        /* halaman surat membuka dari kue seperti lingkaran */
-        setTimeout(function () {
-            suratSlide.style.setProperty("--cx", cx + "px");
-            suratSlide.style.setProperty("--cy", cy + "px");
 
-            main.classList.add("keluar");
-            suratSlide.classList.add("muncul");
+                                const asap =
+                                    document.createElement(
+                                        "div"
+                                    );
 
-            tampilkanSurat();
-        }, 1600);
-    });
+                                asap.className =
+                                    "smoke";
+
+
+                                flame.parentElement
+                                    .appendChild(
+                                        asap
+                                    );
+
+
+                                setTimeout(
+                                    function () {
+
+                                        asap.remove();
+
+                                    },
+                                    1600
+                                );
+
+                            },
+                            i * 180
+                        );
+
+                    }
+                );
+
+
+            const cakeRect =
+                document
+                    .querySelector(".cake")
+                    .getBoundingClientRect();
+
+
+            const cx =
+                cakeRect.left +
+                cakeRect.width / 2;
+
+
+            const cy =
+                cakeRect.top +
+                cakeRect.height / 2;
+
+
+            setTimeout(
+                function () {
+
+                    semburHati(
+                        cx,
+                        cy - 40,
+                        36,
+                        100,
+                        320,
+                        140
+                    );
+
+                },
+                600
+            );
+
+
+            setTimeout(
+                function () {
+
+                    suratSlide.style.setProperty(
+                        "--cx",
+                        cx + "px"
+                    );
+
+                    suratSlide.style.setProperty(
+                        "--cy",
+                        cy + "px"
+                    );
+
+
+                    main.classList.add(
+                        "keluar"
+                    );
+
+                    suratSlide.classList.add(
+                        "muncul"
+                    );
+
+
+                    tampilkanSurat();
+
+
+                },
+                1600
+            );
+
+        }
+    );
+
 
     /* ================= HATI NAIK ================= */
 
     function buatHeart() {
-        const heart = document.createElement("div");
 
-        heart.className = "heart";
-        heart.textContent = "♥";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = 14 + Math.random() * 18 + "px";
-        heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+        const heart =
+            document.createElement("div");
 
-        document.body.appendChild(heart);
+        heart.className =
+            "heart";
 
-        setTimeout(function () {
-            heart.remove();
-        }, 8000);
+        heart.textContent =
+            "♥";
+
+        heart.style.left =
+            Math.random() * 100 +
+            "vw";
+
+        heart.style.fontSize =
+            14 +
+            Math.random() * 18 +
+            "px";
+
+        heart.style.animationDuration =
+            4 +
+            Math.random() * 4 +
+            "s";
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(
+            function () {
+
+                heart.remove();
+
+            },
+            8000
+        );
     }
 
-    setInterval(buatHeart, 1200);
+
+    setInterval(
+        buatHeart,
+        1200
+    );
+
+
+    /* =========================================================
+       TRANSISI + PENUTUP ROMANTIS
+       ========================================================= */
+
+    const transisi      = document.getElementById("transisi");
+    const transisiB1    = document.getElementById("transisiBaris1");
+    const transisiB2    = document.getElementById("transisiBaris2");
+    const finale        = document.getElementById("finale");
+    const finaleBaris   = document.getElementById("finaleBaris");
+    const finaleAkhir   = document.getElementById("finaleAkhir");
+    const finaleUlang   = document.getElementById("finaleUlang");
+    const canvas        = document.getElementById("finaleCanvas");
+    const ctx           = canvas.getContext("2d");
+
+    function tunggu(ms) {
+        return new Promise(function (r) { setTimeout(r, ms); });
+    }
+
+    let transisiJalan = false;
+
+    function buatKelopakTransisi() {
+        for (let i = 0; i < 26; i++) {
+            const k = document.createElement("div");
+            k.className = "kelopak-t";
+            k.style.left = (Math.random() * 100) + "%";
+            k.style.setProperty("--dur", (6 + Math.random() * 5) + "s");
+            k.style.setProperty("--delay", (Math.random() * 6) + "s");
+            k.style.setProperty("--sway", (30 + Math.random() * 60) + "px");
+            const s = .7 + Math.random() * .9;
+            k.style.width = (14 * s) + "px";
+            k.style.height = (18 * s) + "px";
+            transisi.appendChild(k);
+        }
+    }
+
+    async function mulaiTransisi(tombol) {
+
+        if (transisiJalan) return;
+        transisiJalan = true;
+
+        const r = tombol.getBoundingClientRect();
+        transisi.style.setProperty("--cx", (r.left + r.width / 2) + "px");
+        transisi.style.setProperty("--cy", (r.top + r.height / 2) + "px");
+
+        buatKelopakTransisi();
+
+        transisi.classList.add("muncul");
+
+        await tunggu(1900);
+        transisiB1.classList.add("tampil");
+        await tunggu(2800);
+        transisiB1.classList.remove("tampil");
+
+        await tunggu(1300);
+        transisiB2.classList.add("tampil");
+        await tunggu(3600);
+        transisiB2.classList.remove("tampil");
+
+        await tunggu(1200);
+
+        /* masuk ke penutup */
+        finale.classList.add("aktif");
+        mulaiFinale();
+
+        await tunggu(2400);
+
+        transisi.classList.add("pudar");
+        extraSlides.style.display = "none";
+
+        await tunggu(1800);
+        transisi.remove();
+    }
+
+
+    /* ================= PENUTUP: GALAKSI CINTA ================= */
+
+const introCard    = document.getElementById("introCard");
+const tombolMasuk  = document.getElementById("masukAlam");
+const alamHint     = document.getElementById("alamHint");
+const kartuOverlay = document.getElementById("kartuOverlay");
+const kartuMedia   = document.getElementById("kartuMedia");
+const kartuJudul   = document.getElementById("kartuJudul");
+const kartuIsi     = document.getElementById("kartuIsi");
+const kartuTutup   = document.getElementById("kartuTutup");
+
+/* Teks yang melayang mengorbit di galaksi (ganti sesukamu) */
+const TEKS_CINCIN = [
+    "HAPPY BIRTHDAY", "KAMU ADALAH MAGIKU ∞", "CINTA DALAM HIDUPKU",
+    "SELAMAT ULANG TAHUN", "BEBE ♥", "SEMESTA KITA",
+    "SELAMANYA BERSAMA", "AKU SAYANG KAMU", "I LOVE YOU", "MILIKKU SELAMANYA"
+];
+
+/* Stiker yang bisa disentuh -> membuka kartu pesan.
+   foto: nama file gambar (opsional). Kalau tidak ada / gagal dimuat, dipakai emoji. */
+const STIKER = [
+    { emoji: "🐰", judul: "Si Imut-ku",
+      isi: "Kamu tuh alasan akuu senyum-senyum sendiri pas liat hp 💗", foto: "foto-bebe.jpg" },
+    { emoji: "🧸", judul: "Cinta dalam Hidupku",
+      isi: "Makin lama kita sama-sama, makin sayang akuu sama kamuu." },
+    { emoji: "🌹", judul: "Buat Kamu",
+      isi: "Semogaa semua yang kamuu mau tahun ini bisa tercapaii yaa sayangg." },
+    { emoji: "💌", judul: "Surat Kecil",
+      isi: "Walaupun cuma lewat layar, perasaan akuu ke kamuu nyata banget." },
+    { emoji: "🦋", judul: "Jangan Berubah",
+      isi: "Tetep jadi kamuu yang akuu kenal, yang ngeselin tapi ngangenin." },
+    { emoji: "⭐", judul: "Satu Permintaan",
+      isi: "Semogaa suatu hari nanti kita bisa ketemu beneran. Itu aja yang akuu minta." }
+];
+
+const PALET_GAL  = ["#ffffff", "#d9f2ff", "#8dd8ff", "#329dff", "#1768d1", "#5b8cff"];
+const WARP_COL   = ["#329dff", "#7b61ff", "#ffffff", "#8dd8ff"];
+const HEART_COL  = ["#8dd8ff", "#329dff", "#5b8cff", "#d9f2ff"];
+const TAU = Math.PI * 2;
+const D_KAMERA = 3.2;
+
+let W = 0, H = 0, DPR = 1, K = 300, CX = 0, CY = 0;
+let jalan = false, animasiId = null, lastFrame = 0;
+let fase = 0, t0 = 0, tokenFinale = 0;
+let yawUser = 0, pitchUser = .4;
+let latar = [], warp = [], gal = null, hatiPts = null;
+let itemsTeks = [], itemsHati = [], stikerObj = [];
+let hit = [], stikerAktif = false, kartuAktif = false;
+let hatiXY = { x: 0, y: 0 };
+
+/* proyeksi 3D sederhana */
+let cs = 1, sn = 0, cp = 1, sp_ = 0;
+const P = { x: 0, y: 0, z: 0, p: 1 };
+
+function kl(v) { return Math.max(0, Math.min(1, v)); }
+
+function randn() {
+    let u = 0, v = 0;
+    while (!u) u = Math.random();
+    while (!v) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v);
+}
+
+function proyek(x, y, z) {
+    const x1 = x * cs - z * sn;
+    const z1 = x * sn + z * cs;
+    const y2 = y * cp + z1 * sp_;
+    const z2 = z1 * cp - y * sp_;
+    const p = D_KAMERA / Math.max(D_KAMERA + z2, .6);
+    P.x = CX + x1 * K * p;
+    P.y = CY - y2 * K * p;
+    P.z = z2;
+    P.p = p;
+    return P;
+}
+
+function ukuranCanvas() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    K = Math.min(W * .62, H * .56);
+    CX = W / 2;
+    CY = H * .64;
+}
+
+/* ---------- pembuat data ---------- */
+
+function buatLatar() {
+    latar = [];
+    const n = W < 600 ? 90 : 160;
+    for (let i = 0; i < n; i++) {
+        latar.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: .6 + Math.random() * 1.4,
+            f: Math.random() * TAU,
+            v: .0008 + Math.random() * .002
+        });
+    }
+}
+
+function buatWarp() {
+    warp = [];
+    for (let i = 0; i < 420; i++) {
+        warp.push({
+            a: Math.random() * TAU,
+            d: Math.random(),
+            v: .35 + Math.random() * .9,
+            c: Math.floor(Math.random() * 4),
+            r: 1 + Math.random() * 2.2,
+            on: true
+        });
+    }
+}
+
+function buatGalaksi() {
+    const n = W < 600 ? 5500 : 9000;
+    const bagi = [.07, .17, .25, .25, .16, .10];
+    const g = {
+        n: n,
+        rT: new Float32Array(n), thT: new Float32Array(n), yT: new Float32Array(n),
+        rS: new Float32Array(n), yS: new Float32Array(n),
+        dl: new Float32Array(n), sz: new Float32Array(n),
+        bStart: [0]
+    };
+    let idx = 0;
+    for (let b = 0; b < 6; b++) {
+        const cnt = b === 5 ? n - idx : Math.round(n * bagi[b]);
+        for (let j = 0; j < cnt && idx < n; j++, idx++) {
+            const r = b === 0
+                ? Math.pow(Math.random(), 1.6) * .32
+                : Math.pow(Math.random(), .62);
+            const arm = Math.floor(Math.random() * 3);
+            const th = arm * 2.0944 + r * 3.6 + randn() * (.16 + .12 * r);
+            g.rT[idx] = r;
+            g.thT[idx] = th;
+            g.yT[idx] = randn() * .018 * (1.15 - r);
+            g.rS[idx] = 1.3 + Math.random() * 1.3;
+            g.yS[idx] = (Math.random() - .5) * 2;
+            g.dl[idx] = r * 900 + Math.random() * 900;
+            g.sz[idx] = (b === 0 ? 1.1 : .7) + Math.random() * 1.5;
+        }
+        g.bStart.push(idx);
+    }
+    gal = g;
+}
+
+function buatHatiPts() {
+    const n = W < 600 ? 900 : 1500;
+    const h = {
+        n: n,
+        x: new Float32Array(n), y: new Float32Array(n), z: new Float32Array(n),
+        r: new Float32Array(n), f: new Float32Array(n), ph: new Float32Array(n),
+        b: new Uint8Array(n)
+    };
+    for (let i = 0; i < n; i++) {
+        const t = Math.random() * TAU;
+        const ox = 16 * Math.pow(Math.sin(t), 3);
+        const oy = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        const k = Math.random() < .4
+            ? 1 + (Math.random() - .5) * .06
+            : Math.pow(Math.random(), .55);
+        h.x[i] = ox * k;
+        h.y[i] = (oy + 2.5) * k;
+        h.z[i] = (Math.random() - .5) * 5 * k;
+        h.r[i] = .8 + Math.random() * 1.7;
+        h.f[i] = .002 + Math.random() * .004;
+        h.ph[i] = Math.random() * TAU;
+        h.b[i] = Math.floor(Math.random() * 4);
+    }
+    hatiPts = h;
+}
+
+function buatObjek() {
+    itemsTeks = [];
+    const cincin = [
+        { r: .5,  dir:  1, sp: .00022, n: 3 },
+        { r: .72, dir: -1, sp: .00016, n: 3 },
+        { r: .94, dir:  1, sp: .00012, n: 4 }
+    ];
+    let ti = 0;
+    cincin.forEach(function (rg, ri) {
+        for (let j = 0; j < rg.n; j++) {
+            itemsTeks.push({
+                txt: TEKS_CINCIN[ti % TEKS_CINCIN.length],
+                r: rg.r, dir: rg.dir, sp: rg.sp,
+                a0: j / rg.n * TAU + ri * .9
+            });
+            ti++;
+        }
+    });
+
+    itemsHati = [];
+    for (let i = 0; i < 7; i++) {
+        itemsHati.push({
+            r: .25 + Math.random() * .7,
+            dir: Math.random() < .5 ? 1 : -1,
+            sp: .00015 + Math.random() * .0002,
+            a0: Math.random() * TAU,
+            y0: .06 + Math.random() * .14,
+            ph: Math.random() * TAU,
+            sz: 20 + Math.random() * 16
+        });
+    }
+
+    const rad = [.34, .6, .8, .48, .88, .68];
+    stikerObj = STIKER.map(function (s, i) {
+        return {
+            idx: i,
+            emoji: s.emoji,
+            r: rad[i % rad.length],
+            dir: i % 2 ? -1 : 1,
+            sp: .00011 + (i % 3) * .00003,
+            a0: i / STIKER.length * TAU + .4,
+            ph: i * 1.3
+        };
+    });
+}
+
+/* ---------- menggambar ---------- */
+
+function gambarLatar(now) {
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = "#c9eaff";
+    for (let i = 0; i < latar.length; i++) {
+        const b = latar[i];
+        ctx.globalAlpha = .2 + .6 * (.5 + .5 * Math.sin(now * b.v + b.f));
+        ctx.fillRect(b.x, b.y, b.r, b.r);
+    }
+    ctx.globalAlpha = 1;
+}
+
+function gambarItem(o, t, ringA, stA, flat) {
+
+    ctx.save();
+
+    if (o.k === 0) {                       /* teks di cincin */
+
+        ctx.translate(o.x, o.y);
+        ctx.rotate(o.ang);
+        ctx.scale(1, flat);
+        ctx.globalAlpha = ringA * kl(1.05 - o.z * .45) * .95;
+        ctx.font = "bold " + (Math.max(12, K * .05) * o.p) + "px 'Courier New', monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.shadowColor = "rgba(70,170,255,.9)";
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = "#8dd8ff";
+        ctx.fillText(o.it.txt, 0, 0);
+
+    } else if (o.k === 1) {                /* hati melayang */
+
+        ctx.translate(o.x, o.y);
+        ctx.rotate(Math.sin(t * .002 + o.it.ph) * .3);
+        ctx.globalAlpha = ringA * kl(1.1 - o.z * .4);
+        ctx.font = (o.it.sz * o.p * (K / 450)) + "px Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.shadowColor = "rgba(50,157,255,.95)";
+        ctx.shadowBlur = 18;
+        ctx.fillStyle = "#5b8cff";
+        ctx.fillText("♥", 0, 0);
+
+    } else {                               /* stiker */
+
+        const ukuran = Math.max(26, K * .075) * o.p;
+        const pulse = 1 + .06 * Math.sin(t * .004 + o.it.ph);
+
+        ctx.translate(o.x, o.y);
+        ctx.globalAlpha = stA * kl(1.1 - o.z * .4);
+
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, ukuran * .95 * pulse);
+        g.addColorStop(0, "rgba(70,170,255,.5)");
+        g.addColorStop(1, "rgba(70,170,255,0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(0, 0, ukuran * .95 * pulse, 0, TAU);
+        ctx.fill();
+
+        ctx.font = ukuran + "px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#fff";
+        ctx.fillText(o.it.emoji, 0, 0);
+
+        if (stA > .6) {
+            hit.push({ x: o.x, y: o.y, r: ukuran * .8, i: o.it.idx });
+        }
+    }
+
+    ctx.restore();
+}
+
+function alam(t, now, dt) {
+
+    const yaw = t * .00007 + yawUser;
+    const pit = pitchUser + .035 * Math.sin(t * .0004);
+
+    cs = Math.cos(yaw);
+    sn = Math.sin(yaw);
+    cp = Math.cos(pit);
+    sp_ = Math.sin(pit);
+
+    const flat = Math.max(.14, sp_);
+
+    /* ---- ledakan partikel (warp) ---- */
+    if (t < 5000) {
+
+        const maxD = Math.hypot(W, H) * .6;
+        const pudarW = t > 3400 ? Math.max(0, 1 - (t - 3400) / 1500) : 1;
+
+        ctx.globalCompositeOperation = "lighter";
+
+        for (let i = 0; i < warp.length; i++) {
+            const w = warp[i];
+            if (!w.on) continue;
+
+            w.d += w.v * dt * (.22 + w.d * 2.4);
+
+            if (w.d > 1.3) {
+                if (t < 2900) {
+                    w.d = .01;
+                    w.a = Math.random() * TAU;
+                } else {
+                    w.on = false;
+                    continue;
+                }
+            }
+
+            ctx.globalAlpha = Math.min(1, w.d * 7) * pudarW;
+            ctx.fillStyle = WARP_COL[w.c];
+            ctx.beginPath();
+            ctx.arc(
+                CX + Math.cos(w.a) * w.d * maxD,
+                CY + Math.sin(w.a) * w.d * maxD * .85,
+                w.r * (.4 + w.d * 3),
+                0, TAU
+            );
+            ctx.fill();
+        }
+    }
+
+    /* ---- cahaya galaksi ---- */
+    const gf = kl((t - 1800) / 3000);
+
+    if (gf > 0) {
+        ctx.globalCompositeOperation = "lighter";
+        ctx.save();
+        ctx.translate(CX, CY);
+        ctx.scale(1, flat);
+        const gl = ctx.createRadialGradient(0, 0, 0, 0, 0, K * .75);
+        gl.addColorStop(0,  "rgba(65,155,255," + (.5 * gf) + ")");
+        gl.addColorStop(.35, "rgba(40,105,230," + (.25 * gf) + ")");
+        gl.addColorStop(1,  "rgba(40,105,230,0)");
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = gl;
+        ctx.beginPath();
+        ctx.arc(0, 0, K * .75, 0, TAU);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    /* ---- partikel galaksi ---- */
+    if (t > 1300 && gal) {
+
+        ctx.globalCompositeOperation = "lighter";
+
+        for (let b = 0; b < 6; b++) {
+
+            ctx.fillStyle = PALET_GAL[b];
+            ctx.globalAlpha = b === 0 ? .95 : .7;
+
+            for (let i = gal.bStart[b]; i < gal.bStart[b + 1]; i++) {
+
+                let e = (t - 1300 - gal.dl[i]) / 2600;
+                if (e <= 0) continue;
+                if (e > 1) e = 1;
+                e = 1 - Math.pow(1 - e, 3);
+
+                const r  = gal.rS[i] + (gal.rT[i] - gal.rS[i]) * e;
+                const th = gal.thT[i] + (1 - e) * 2.6;
+                const y  = gal.yS[i] + (gal.yT[i] - gal.yS[i]) * e;
+
+                const x = r * Math.cos(th);
+                const z = r * Math.sin(th);
+
+                const x1 = x * cs - z * sn;
+                const z1 = x * sn + z * cs;
+                const y2 = y * cp + z1 * sp_;
+                const z2 = z1 * cp - y * sp_;
+                const p  = D_KAMERA / Math.max(D_KAMERA + z2, .6);
+                const s  = gal.sz[i] * p;
+
+                ctx.fillRect(
+                    CX + x1 * K * p - s / 2,
+                    CY - y2 * K * p - s / 2,
+                    s, s
+                );
+            }
+        }
+    }
+
+    /* ---- lubang hitam di pusat ---- */
+    if (gf > 0) {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = 1;
+        const rr = K * .07 * gf;
+        ctx.save();
+        ctx.translate(CX, CY);
+        ctx.scale(1, flat);
+        ctx.shadowColor = "rgba(50,157,255,.95)";
+        ctx.shadowBlur = 28;
+        ctx.lineWidth = K * .012;
+        ctx.strokeStyle = "rgba(140,210,255," + gf + ")";
+        ctx.beginPath();
+        ctx.arc(0, 0, rr, 0, TAU);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(0, 0, rr * .72, 0, TAU);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    /* ---- kumpulkan benda melayang (teks, hati, stiker) ---- */
+    const ringA = kl((t - 6800) / 2200);
+    const stA   = kl((t - 7600) / 1800);
+
+    hit.length = 0;
+    stikerAktif = stA > .6;
+
+    const lis = [];
+
+    if (ringA > 0) {
+
+        for (let i = 0; i < itemsTeks.length; i++) {
+            const it = itemsTeks[i];
+            const a = it.a0 + it.dir * it.sp * t;
+            const px = Math.cos(a) * it.r;
+            const pz = Math.sin(a) * it.r;
+
+            proyek(px, .02, pz);
+            const X = P.x, Y = P.y, Z = P.z, Pp = P.p;
+
+            proyek(px + (-Math.sin(a) * it.dir) * .06, .02, pz + (Math.cos(a) * it.dir) * .06);
+            let ang = Math.atan2(P.y - Y, P.x - X);
+            if (Math.cos(ang) < 0) ang += Math.PI;
+
+            lis.push({ k: 0, z: Z, x: X, y: Y, p: Pp, ang: ang, it: it });
+        }
+
+        for (let i = 0; i < itemsHati.length; i++) {
+            const it = itemsHati[i];
+            const a = it.a0 + it.dir * it.sp * t;
+            proyek(
+                Math.cos(a) * it.r,
+                it.y0 + .05 * Math.sin(t * .0015 + it.ph),
+                Math.sin(a) * it.r
+            );
+            lis.push({ k: 1, z: P.z, x: P.x, y: P.y, p: P.p, it: it });
+        }
+    }
+
+    if (stA > 0) {
+        for (let i = 0; i < stikerObj.length; i++) {
+            const it = stikerObj[i];
+            const a = it.a0 + it.dir * it.sp * t;
+            proyek(
+                Math.cos(a) * it.r,
+                .09 + .03 * Math.sin(t * .002 + it.ph),
+                Math.sin(a) * it.r
+            );
+            lis.push({ k: 2, z: P.z, x: P.x, y: P.y, p: P.p, it: it });
+        }
+    }
+
+    lis.sort(function (a, b) { return b.z - a.z; });
+
+    ctx.globalCompositeOperation = "source-over";
+
+    /* benda yang ada di belakang hati */
+    for (let i = 0; i < lis.length; i++) {
+        if (lis[i].z > 0) gambarItem(lis[i], t, ringA, stA, flat);
+    }
+
+    /* ---- sinar & hati ---- */
+    const hr = kl((t - 4300) / 3200);
+    const hrE = 1 - Math.pow(1 - hr, 3);
+
+    if (hr > 0 && hatiPts) {
+
+        const hy = .05 + hrE * .64;
+
+        proyek(0, hy, 0);
+        const hx0 = P.x, hy0 = P.y, hz0 = P.z;
+        hatiXY.x = hx0;
+        hatiXY.y = hy0;
+
+        const detak = 1 + .035 * Math.sin(now * .005) + .022 * Math.sin(now * .011);
+        const sH = .0185 * (W < 600 ? 1.25 : 1) * (.2 + .8 * hrE) * detak;
+
+        /* sinar dari pusat galaksi */
+        const beamA = hr < 1 ? 1 : Math.max(0, 1 - (t - 7500) / 1500);
+
+        if (beamA > 0) {
+            ctx.globalCompositeOperation = "lighter";
+            const bg = ctx.createLinearGradient(CX, CY, hx0, hy0);
+            bg.addColorStop(0, "rgba(180,225,255,.95)");
+            bg.addColorStop(1, "rgba(45,145,255,0)");
+            ctx.save();
+            ctx.globalAlpha = beamA;
+            ctx.strokeStyle = bg;
+            ctx.lineWidth = 5;
+            ctx.shadowColor = "rgba(70,170,255,.95)";
+            ctx.shadowBlur = 16;
+            ctx.beginPath();
+            ctx.moveTo(CX, CY);
+            ctx.lineTo(hx0, hy0);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        /* cahaya di belakang hati */
+        ctx.globalCompositeOperation = "lighter";
+        const rg = sH * K * 22;
+        const hg = ctx.createRadialGradient(hx0, hy0, 0, hx0, hy0, rg);
+        hg.addColorStop(0, "rgba(50,157,255," + (.34 * hrE) + ")");
+        hg.addColorStop(1, "rgba(50,157,255,0)");
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = hg;
+        ctx.beginPath();
+        ctx.arc(hx0, hy0, rg, 0, TAU);
+        ctx.fill();
+
+        /* titik-titik hati (berputar pelan agar terasa 3D) */
+        const ry = Math.sin(t * .0007) * .55;
+        const cr = Math.cos(ry), sr = Math.sin(ry);
+
+        for (let b = 0; b < 4; b++) {
+
+            ctx.fillStyle = HEART_COL[b];
+            ctx.globalAlpha = .85 * (.4 + .6 * hrE);
+
+            for (let i = 0; i < hatiPts.n; i++) {
+
+                if (hatiPts.b[i] !== b) continue;
+
+                const lx = hatiPts.x[i] * cr - hatiPts.z[i] * sr;
+                const lz = hatiPts.x[i] * sr + hatiPts.z[i] * cr;
+                const pp = D_KAMERA / Math.max(D_KAMERA + hz0 + lz * sH, .6);
+
+                const s = hatiPts.r[i] * pp *
+                    (.8 + .5 * Math.sin(now * hatiPts.f[i] + hatiPts.ph[i])) *
+                    (.7 + .3 * hrE);
+
+                ctx.fillRect(
+                    hx0 + lx * sH * K * pp - s / 2,
+                    hy0 - hatiPts.y[i] * sH * K * pp - s / 2,
+                    s, s
+                );
+            }
+        }
+
+        ctx.globalCompositeOperation = "source-over";
+    }
+
+    /* benda yang ada di depan hati */
+    for (let i = 0; i < lis.length; i++) {
+        if (lis[i].z <= 0) gambarItem(lis[i], t, ringA, stA, flat);
+    }
+}
+
+function frame(now) {
+
+    if (!jalan) return;
+
+    const dt = Math.min(.05, (now - lastFrame) / 1000);
+    lastFrame = now;
+
+    if (fase === 0) {
+        ctx.clearRect(0, 0, W, H);
+    } else {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = "rgba(2,8,25,.32)";
+        ctx.fillRect(0, 0, W, H);
+    }
+
+    gambarLatar(now);
+
+    if (fase === 1) alam(now - t0, now, dt);
+
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
+
+    animasiId = requestAnimationFrame(frame);
+}
+
+/* ---------- alur penutup ---------- */
+
+/* dipanggil dari transisi: tampilkan kartu pembuka dulu */
+function mulaiFinale() {
+
+    ukuranCanvas();
+    buatLatar();
+
+    fase = 0;
+    jalan = true;
+    lastFrame = performance.now();
+
+    if (animasiId) cancelAnimationFrame(animasiId);
+    animasiId = requestAnimationFrame(frame);
+}
+
+/* dipanggil saat tombol "Masuk ke semesta kita" ditekan (dan saat putar ulang) */
+function mulaiAlam() {
+
+    fase = 1;
+    t0 = performance.now();
+    yawUser = 0;
+    pitchUser = .4;
+
+    introCard.classList.add("hilang");
+    alamHint.classList.remove("tampil");
+
+    buatWarp();
+    buatGalaksi();
+    buatHatiPts();
+    buatObjek();
+
+    urutanTeksFinale();
+
+    const tk = tokenFinale;
+    setTimeout(function () {
+        if (tk === tokenFinale && fase === 1) alamHint.classList.add("tampil");
+    }, 9500);
+}
+
+async function urutanTeksFinale() {
+
+    const token = ++tokenFinale;
+
+    finaleAkhir.classList.remove("tampil");
+    finaleBaris.classList.remove("tampil");
+    finaleBaris.textContent = "";
+
+    await tunggu(7200);
+    if (token !== tokenFinale) return;
+
+    for (let i = 0; i < BARIS_FINALE.length; i++) {
+
+        finaleBaris.innerHTML = BARIS_FINALE[i].replace(/\n/g, "<br>");
+
+        /* paksa reflow agar transisi jalan lagi */
+        void finaleBaris.offsetWidth;
+        finaleBaris.classList.add("tampil");
+
+        await tunggu(3300);
+        if (token !== tokenFinale) return;
+
+        finaleBaris.classList.remove("tampil");
+
+        await tunggu(1200);
+        if (token !== tokenFinale) return;
+    }
+
+    finaleAkhir.classList.add("tampil");
+
+    /* hujan hati kecil saat kalimat terakhir muncul */
+    semburHati(hatiXY.x || W / 2, hatiXY.y || H * .3, 26, 80, 260, 120, "#8dd8ff");
+}
+
+/* ---------- kartu pesan ---------- */
+
+function kotakEmoji(emoji) {
+    const d = document.createElement("div");
+    d.className = "kartu-emoji";
+    d.textContent = emoji;
+    return d;
+}
+
+function bukaKartu(i) {
+
+    const s = STIKER[i];
+
+    kartuMedia.innerHTML = "";
+
+    if (s.foto) {
+        const im = new Image();
+        im.alt = "";
+        im.onerror = function () {
+            kartuMedia.innerHTML = "";
+            kartuMedia.appendChild(kotakEmoji(s.emoji));
+        };
+        im.src = s.foto;
+        kartuMedia.appendChild(im);
+    } else {
+        kartuMedia.appendChild(kotakEmoji(s.emoji));
+    }
+
+    kartuJudul.textContent = s.judul;
+    kartuIsi.textContent = s.isi;
+
+    kartuAktif = true;
+    kartuOverlay.classList.add("buka");
+    canvas.classList.add("redup");
+}
+
+function tutupKartu() {
+    kartuAktif = false;
+    kartuOverlay.classList.remove("buka");
+    canvas.classList.remove("redup");
+}
+
+kartuTutup.addEventListener("click", tutupKartu);
+
+kartuOverlay.addEventListener("click", function (e) {
+    if (e.target === kartuOverlay) tutupKartu();
+});
+
+tombolMasuk.addEventListener("click", function () {
+    if (fase === 0) mulaiAlam();
+});
+
+finaleUlang.addEventListener("click", mulaiAlam);
+
+/* ---------- geser untuk memutar, sentuh stiker untuk buka pesan ---------- */
+
+let drag = null;
+
+finale.addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button, .kartu-overlay, .intro-card")) return;
+    drag = { lx: e.clientX, ly: e.clientY, tot: 0 };
+});
+
+window.addEventListener("pointermove", function (e) {
+    if (!drag || fase !== 1) return;
+    const dx = e.clientX - drag.lx;
+    const dy = e.clientY - drag.ly;
+    drag.lx = e.clientX;
+    drag.ly = e.clientY;
+    drag.tot += Math.abs(dx) + Math.abs(dy);
+    yawUser += dx * .006;
+    pitchUser = Math.min(1.15, Math.max(.2, pitchUser + dy * .004));
+});
+
+window.addEventListener("pointerup", function (e) {
+
+    if (!drag) return;
+
+    const d = drag;
+    drag = null;
+
+    if (d.tot > 10) return;
+
+    if (fase === 1 && stikerAktif && !kartuAktif) {
+
+        let terbaik = null, jarakTerbaik = 1e9;
+
+        for (let i = 0; i < hit.length; i++) {
+            const h = hit[i];
+            const jarak = Math.hypot(e.clientX - h.x, e.clientY - h.y);
+            if (jarak < h.r * 1.4 && jarak < jarakTerbaik) {
+                jarakTerbaik = jarak;
+                terbaik = h;
+            }
+        }
+
+        if (terbaik) {
+            bukaKartu(terbaik.i);
+            return;
+        }
+    }
+
+    semburHati(e.clientX, e.clientY, 10, 50, 150, -30, "#8dd8ff");
+});
+
+window.addEventListener("resize", function () {
+    if (!jalan) return;
+    ukuranCanvas();
+    buatLatar();
+});
+
 </script>
 </body>
 </html>
